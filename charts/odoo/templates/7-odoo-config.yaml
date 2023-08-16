@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: odoo-config
+  namespace: {{.Values.namespace}}
+  labels:
+    app: odoo
+data:
+  ODOO_EXTRA_MODULES: {{.Values.odoo.extramodules}}
+  NATIVE_MODULES: {{.Values.odoo.nativemodules}}
+  SERVER_WIDE_MODULES: {{.Values.odoo.serverwidemodules}}
+  MAIN_GIT: {{.Values.odoo.mainrepo}}
+  MAIN_GIT_BRANCH: {{.Values.odoo.mainbranch}}
+  MAIN_GIT_TOKEN: {{.Values.odoo.maingittoken}}
+  CUSTOM_GIT: {{.Values.odoo.customgit}}
+  CUSTOM_GIT_BRANCH: {{.Values.odoo.customgitbranch}}
+  CUSTOM_GIT_TOKEN: {{.Values.odoo.customgittoken}}

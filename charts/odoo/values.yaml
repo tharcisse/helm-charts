@@ -1,0 +1,43 @@
+
+#namespace: NAMESPACE
+postgres:
+  password: PG_RANDOM_PASSWORD
+  imageversion: postgres:15
+  storage: 5Gi
+  cpurequest: ""
+  cpulimit: ""
+  memoryquota: ""
+odoo: 
+  imageversion: odoo:16
+  subdomain: subdomain
+  domain: domain.com
+  extramodules: ""
+  mainrepo: ""
+  mainbranch: ""
+  mainaddonsfolder: ""
+  customgit: ""
+  customgitbranch: ""
+  maingittoken: ""
+  customgittoken: ""
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: subdomain.domain
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: 
+      - secretName: odoo-tls
+        hosts:
+        - subdomain.domain
+  
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

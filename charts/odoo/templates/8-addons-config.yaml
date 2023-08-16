@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: addons-scripts
+  namespace: {{.Values.namespace}}
+  labels:
+    app: odoo
+data:
+{{ (.Files.Glob "scripts/run.sh").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/requirements.sh").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/global_addons_import.sh").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/custom_addons_import.sh").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/entrypoint.sh").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/odoo.conf").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/wait-for-psql.py").AsConfig | indent 2 }}
+
+
