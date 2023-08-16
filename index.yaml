@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  odoo:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-16T16:59:40.94883112+03:00"
+    description: Odoo SaaS
+    digest: 164b8ed497674f4b4824eb54cae373fa4479a4aa075d8cc8cfaced69c68cefc8
+    name: odoo
+    type: application
+    urls:
+    - https://tharcisse.github.io/helm-charts/odoo-0.1.24.tgz
+    version: 0.1.24
+  saasconfig:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-16T16:59:40.949417667+03:00"
+    description: Odoo SaaS Platform infrastructure Chart
+    digest: 9126a9c13c7e9dc0bfa139f634cbb7d9eb5107ebfefcb29cb17b6f5ba2e0fb34
+    name: saasconfig
+    type: application
+    urls:
+    - https://tharcisse.github.io/helm-charts/saasconfig-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-08-16T16:59:40.947890998+03:00"
