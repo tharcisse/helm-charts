@@ -7,7 +7,7 @@ metadata:
     app: odoo
 data:
   ODOO_EXTRA_MODULES: {{.Values.odoo.extramodules}}
-  NATIVE_MODULES: {{.Values.odoo.nativemodules}}
+  ODOO_NATIVE_MODULES: {{.Values.odoo.nativemodules}}
   SERVER_WIDE_MODULES: {{.Values.odoo.serverwidemodules}}
   MAIN_GIT: {{.Values.odoo.mainrepo}}
   MAIN_GIT_BRANCH: {{.Values.odoo.mainbranch}}

@@ -1,17 +1,21 @@
 
 #namespace: NAMESPACE
+env: "prod"
 postgres:
   password: PG_RANDOM_PASSWORD
   imageversion: postgres:15
   storage: 5Gi
-  cpurequest: ""
-  cpulimit: ""
-  memoryquota: ""
+  cpurequest: 1
+  cpulimit: 3
+  memoryrequest: 1Gi
+  memorylimit: 4G
+  
 odoo: 
   imageversion: odoo:16
   subdomain: subdomain
   domain: domain.com
   extramodules: ""
+  nativemodules: ""
   mainrepo: ""
   mainbranch: ""
   mainaddonsfolder: ""
@@ -21,6 +25,7 @@ odoo:
   customgittoken: ""
   ingress:
     enabled: false
+    email: ""
     className: ""
     annotations: {}
       # kubernetes.io/ingress.class: nginx

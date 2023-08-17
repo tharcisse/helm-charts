@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
-  name: letsencrypt-production
+  name: odoo-letsencrypt-{{.Values.env}}
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: example@domain.com
+    email: {{.Values.odoo.ingress.email}}
     privateKeySecretRef:
-      name: letsencrypt-production
+      name: odoo-letsencrypt-{{.Values.env}}
     solvers:
       - http01:
           ingress:

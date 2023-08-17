@@ -4,7 +4,7 @@ metadata:
   name: mem-cpu-demo
 spec:
   hard:
-    requests.cpu: 2
-    requests.memory: 1Gi
-    limits.cpu: 3
-    limits.memory: 2Gi
+    requests.cpu: {{.Values.postgres.cpurequest}}
+    requests.memory: {{.Values.postgres.memoryrequest}}
+    limits.cpu: {{.Values.postgres.cpulimit}}
+    limits.memory: {{.Values.postgres.memorylimit}}
