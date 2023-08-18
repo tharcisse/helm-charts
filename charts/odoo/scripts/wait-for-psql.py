@@ -13,7 +13,8 @@ if __name__ == '__main__':
     arg_parser.add_argument('--db_password', required=True)
     arg_parser.add_argument('--timeout', type=int, default=5)
 
-    args = arg_parser.parse_args()
+    #args = arg_parser.parse_args()
+    args, unknown = arg_parser.parse_known_args()
 
     start_time = time.time()
     while (time.time() - start_time) < args.timeout:
