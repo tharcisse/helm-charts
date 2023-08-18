@@ -5,7 +5,7 @@ echo "Starting Entrypoint"
 echo "Params $1  and $2"
 
 if [ -v PASSWORD_FILE ]; then
-    PASSWORD="$(< $PASSWORD_FILE)"
+    PASSWORD="$(<$PASSWORD_FILE)"
 fi
 
 # set the postgres database host, port, user and password according to the environment
@@ -19,9 +19,9 @@ DB_ARGS=()
 function check_config() {
     param="$1"
     value="$2"
-    if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC" ; then       
-        value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d " " -f3|sed 's/["\n\r]//g')
-    fi;
+    if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC"; then
+        value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" | cut -d " " -f3 | sed 's/["\n\r]//g')
+    fi
     DB_ARGS+=("--${param}")
     DB_ARGS+=("${value}")
 }
@@ -30,52 +30,51 @@ check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
-if [[ "$SERVER_WIDE_MODULES" != "undefined" ]];then
+if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
     check_config "load" "$SERVER_WIDE_MODULES"
 fi
-if [[ "$SERVER_WIDE_MODULES" != "undefined" ]];then
+if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
     check_config "load" "$SERVER_WIDE_MODULES"
 fi
 
 TOINSTALL=''
 
-if [[ "$ODOO_NATIVE_MODULES" != "undefined" ]];then
+if [[ "$ODOO_NATIVE_MODULES" != "undefined" ]]; then
     TOINSTALL+="$ODOO_NATIVE_MODULES"
 fi
 
-if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]];then
+if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
     if [[ -n "$TOINSTALL" ]]; then
-      TOINSTALL="$TOINSTALL,"
+        TOINSTALL="$TOINSTALL,"
     fi
     TOINSTALL+="$ODOO_EXTRA_MODULES"
 fi
 
-
-
-if [[ -n "$TOINSTALL" ]]
+if [[ -n "$TOINSTALL" ]]; then
     check_config "init" "$TOINSTALL"
 fi
 
 echo "ODOO ARGUMENTS: ${DB_ARGS[@]}"
 
 case "$1" in
-    -- | odoo)
-        shift
-        if [[ "$1" == "scaffold" ]] ; then
-            exec odoo "$@"
-        else
-            wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-            exec odoo "$@" "${DB_ARGS[@]}"
-        fi
-        ;;
-    -*)
+-- | odoo)
+    shift
+    if [[ "$1" == "scaffold" ]]; then
+        exec odoo "$@"
+    else
         wait-for-psql.py ${DB_ARGS[@]} --timeout=30
         exec odoo "$@" "${DB_ARGS[@]}"
-        ;;
-    *)
-        exec "$@"
+    fi
+    ;;
+-*)
+    wait-for-psql.py ${DB_ARGS[@]} --timeout=30
+    exec odoo "$@" "${DB_ARGS[@]}"
+    ;;
+*)
+    exec "$@"
+    ;;
 esac
 
 exit 1
