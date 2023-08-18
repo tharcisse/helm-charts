@@ -41,7 +41,7 @@ fi
 
 TOINSTALL=''
 
-if [[ "$ODOO_NATIVE_MODULES" != "undefined"]];then
+if [[ "$ODOO_NATIVE_MODULES" != "undefined" ]];then
     TOINSTALL+="$ODOO_NATIVE_MODULES"
 fi
 
@@ -57,6 +57,7 @@ fi
 if [[ -n "$TOINSTALL" ]]
     check_config "init" "$TOINSTALL"
 fi
+
 echo "ODOO ARGUMENTS: ${DB_ARGS[@]}"
 
 case "$1" in
