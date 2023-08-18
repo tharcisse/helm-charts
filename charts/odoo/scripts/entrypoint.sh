@@ -32,12 +32,11 @@ check_config "db_password" "$PASSWORD"
 
 ADD_ARGS=()
 
-
 if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
     ADD_ARGS+=("--load")
     ADD_ARGS+=("${SERVER_WIDE_MODULES}")
-    
+
 fi
 
 TOINSTALL=''
@@ -58,7 +57,7 @@ if [[ -n "$TOINSTALL" ]]; then
     ADD_ARGS+=("${TOINSTALL}")
 fi
 
-ODOO_ARGS= ("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
+ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
 
 echo "ODOO ARGUMENTS: ${ODOO_ARGS[@]}"
 
