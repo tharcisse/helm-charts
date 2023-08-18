@@ -3,7 +3,7 @@ entries:
   kube-webshell:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-08-18T12:06:41.093168175+03:00"
+    created: "2023-08-18T12:19:15.897269745+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: e0e5245788d86a11118ba3172429b71cc210a7398c89e24b38061009defa0678
     keywords:
@@ -22,7 +22,7 @@ entries:
   odoo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-08-18T12:06:41.094431546+03:00"
+    created: "2023-08-18T12:19:15.898113826+03:00"
     description: Odoo SaaS
     digest: cfb1be9e910cfcefdb0845041d3a538eaaf4e097ef54b68324977add7a0423b5
     name: odoo
@@ -33,7 +33,27 @@ entries:
   saasconfig:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-08-18T12:06:41.097954246+03:00"
+    created: "2023-08-18T12:19:15.901087552+03:00"
+    description: Odoo SaaS Platform infrastructure Chart
+    digest: bd79411b123f43d781a00bf6b4fe4cc6a68a14c91b76125f778625d3d89f9088
+    name: saasconfig
+    type: application
+    urls:
+    - https://tharcisse.github.io/helm-charts/saasconfig-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-18T12:19:15.900500976+03:00"
+    description: Odoo SaaS Platform infrastructure Chart
+    digest: 4d9f80025ee884596dd151f31e86b5cabe84f1efb8622e87ecae2fb48235e638
+    name: saasconfig
+    type: application
+    urls:
+    - https://tharcisse.github.io/helm-charts/saasconfig-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-18T12:19:15.89995882+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 11c22655848daca1d2c919d774e680cc7e76e85aa80c6dd66ddc53bc85010e0a
     name: saasconfig
@@ -43,7 +63,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-08-18T12:06:41.096553573+03:00"
+    created: "2023-08-18T12:19:15.89934287+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 075bcc0d7ff6d9e0d6d082b2cc3bedacb5bf9af57616022c82d34271899322e3
     name: saasconfig
@@ -53,7 +73,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-08-18T12:06:41.09526755+03:00"
+    created: "2023-08-18T12:19:15.898696941+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 8664e3166585ce2274518d3ba6957b1f0f8e7097fca38f2004d7238d00ae547c
     name: saasconfig
@@ -61,4 +81,4 @@ entries:
     urls:
     - https://tharcisse.github.io/helm-charts/saasconfig-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-18T12:06:41.091959874+03:00"
+generated: "2023-08-18T12:19:15.89640656+03:00"
