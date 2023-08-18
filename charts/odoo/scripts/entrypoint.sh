@@ -57,6 +57,10 @@ if [[ -n "$TOINSTALL" ]]; then
     ADD_ARGS+=("${TOINSTALL}")
 fi
 
+if [[ -n "$ODOO_DB" ]]; then
+    ADD_ARGS+=("--database")
+    ADD_ARGS+=("${ODOO_DB}")
+fi
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
 
 echo "ODOO ARGUMENTS: ${ODOO_ARGS[@]}"
