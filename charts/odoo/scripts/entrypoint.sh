@@ -30,13 +30,14 @@ check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
+ADD_ARGS=()
+
+
 if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
-    check_config "load" "$SERVER_WIDE_MODULES"
-fi
-if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
-    #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
-    check_config "load" "$SERVER_WIDE_MODULES"
+    ADD_ARGS+=("--load")
+    ADD_ARGS+=("${SERVER_WIDE_MODULES}")
+    
 fi
 
 TOINSTALL=''
@@ -53,10 +54,13 @@ if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
 fi
 
 if [[ -n "$TOINSTALL" ]]; then
-    check_config "init" "$TOINSTALL"
+    ADD_ARGS+=("--init")
+    ADD_ARGS+=("${TOINSTALL}")
 fi
 
-echo "ODOO ARGUMENTS: ${DB_ARGS[@]}"
+ODOO_ARGS= ("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
+
+echo "ODOO ARGUMENTS: ${ODOO_ARGS[@]}"
 
 case "$1" in
 -- | odoo)
@@ -65,12 +69,12 @@ case "$1" in
         exec odoo "$@"
     else
         wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        exec odoo "$@" "${DB_ARGS[@]}"
+        exec odoo "$@" "${ODOO_ARGS[@]}"
     fi
     ;;
 -*)
     wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-    exec odoo "$@" "${DB_ARGS[@]}"
+    exec odoo "$@" "${ODOO_ARGS[@]}"
     ;;
 *)
     exec "$@"
