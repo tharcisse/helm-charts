@@ -30,18 +30,34 @@ check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
-if [ "$SERVER_WIDE_MODULES" !="undefined" ];then
+if [["$SERVER_WIDE_MODULES" !="undefined" ]];then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
     check_config "load" "$SERVER_WIDE_MODULES"
 fi
-if [ "$SERVER_WIDE_MODULES" !="undefined" ];then
+if [[ "$SERVER_WIDE_MODULES" !="undefined" ]];then
     #check_config "server_wide_modules" "$SERVER_WIDE_MODULES"
     check_config "load" "$SERVER_WIDE_MODULES"
-fi
-if [ "$ODOO_NATIVE_MODULES" != "" || "$ODOO_EXTRA_MODULES" != "" ]
-    check_config "init" "$ODOO_NATIVE_MODULES","$ODOO_EXTRA_MODULES"
 fi
 
+TOINSTALL=''
+
+if [["$ODOO_NATIVE_MODULES" != "undefined"]];then
+    TOINSTALL+="$ODOO_NATIVE_MODULES"
+fi
+
+if [["$ODOO_EXTRA_MODULES" != "undefined"]];then
+    if [[ -n "$TOINSTALL" ]]; then
+      TOINSTALL="$TOINSTALL,"
+    fi
+    TOINSTALL+="$ODOO_EXTRA_MODULES"
+fi
+
+
+
+if [[ -n "$TOINSTALL" ]]
+    check_config "init" "$TOINSTALL"
+fi
+echo "ODOO ARGUMENTS: ${DB_ARGS[@]}"
 
 case "$1" in
     -- | odoo)

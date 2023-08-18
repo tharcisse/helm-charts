@@ -17,7 +17,22 @@ elif [[ "$CUSTOM_GIT_TOKEN" != "undefined" ]]; then
     if test -f "$FILE"; then
         pip3 install -r requirements.txt
     fi
+    CU_EXTRA_MODULES=()
     cp -R * /mnt/extra-addons
+    for i in * ; do
+        if [ -d $i ]
+        then
+            echo $i
+            CU_EXTRA_MODULES+=($i)
+        fi
+    done
+    if [ -n "$CU_EXTRA_MODULES" ]; then
+        if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]];then
+
+            ODOO_EXTRA_MODULES+=",${CU_EXTRA_MODULES[@]}"
+        fi
+    fi
+    
     cd ../
     rm -r custom
 else
@@ -25,6 +40,19 @@ else
     FILE=requirements.txt
     if test -f "$FILE"; then
         pip3 install -r requirements.txt
+    fi
+    for i in * ; do
+        if [ -d $i ]
+        then
+            echo $i
+            CU_EXTRA_MODULES+=($i)
+        fi
+    done
+    if [ -n "$CU_EXTRA_MODULES" ]; then
+        if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]];then
+
+            ODOO_EXTRA_MODULES+=",${CU_EXTRA_MODULES[@]}"
+        fi
     fi
     cp -R * /mnt/extra-addons
     cd ../

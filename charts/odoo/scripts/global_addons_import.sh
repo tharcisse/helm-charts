@@ -24,12 +24,14 @@ if [ -d "$directory" ]
 then
     cd addons
     set -f
+    AV_EXTRA_MODULES=()
     if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
         array=($ODOO_EXTRA_MODULES)
         for i in "${array[@]}"; do
             if [ -d $i ]
             then
                 echo $i
+                AV_EXTRA_MODULES+=($i)
                 FILE=${i}/requirements.txt
                 if test -f "$FILE"; then
                     pip3 install -r ${i}/requirements.txt
@@ -37,6 +39,7 @@ then
                 cp -R $i /mnt/extra-addons/
             fi
         done
+        ODOO_EXTRA_MODULES="${AV_EXTRA_MODULES[@]}"
     fi
     cd ../
     rm -r addons
