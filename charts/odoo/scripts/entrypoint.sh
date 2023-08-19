@@ -60,7 +60,11 @@ fi
 if [[ -n "$ODOO_DB" ]]; then
     ADD_ARGS+=("--database")
     ADD_ARGS+=("${ODOO_DB}")
+    ADD_ARGS+=("--without-demo-data")
+    ADD_ARGS+=("all")
+    
 fi
+
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
 
 echo "ODOO ARGUMENTS: ${ODOO_ARGS[@]}"
