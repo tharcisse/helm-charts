@@ -42,14 +42,14 @@ fi
 TOINSTALL=''
 
 if [[ "$ODOO_NATIVE_MODULES" != "undefined" ]]; then
-    TOINSTALL+="$ODOO_NATIVE_MODULES"
+    TOINSTALL+="${ODOO_NATIVE_MODULES/ /,}"
 fi
 
 if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
     if [[ -n "$TOINSTALL" ]]; then
         TOINSTALL="$TOINSTALL,"
     fi
-    TOINSTALL+="$ODOO_EXTRA_MODULES"
+    TOINSTALL+="${ODOO_EXTRA_MODULES/ /,}"
 fi
 
 if [[ -n "$TOINSTALL" ]]; then
