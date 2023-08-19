@@ -60,7 +60,7 @@ fi
 if [[ -n "$ODOO_DB" ]]; then
     ADD_ARGS+=("--database")
     ADD_ARGS+=("${ODOO_DB}")
-    ADD_ARGS+=("--without-demo-data=all")
+    ADD_ARGS+=("--without-demo=all")
     #ADD_ARGS+=("all")
     
 fi
