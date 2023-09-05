@@ -31,13 +31,16 @@ spec:
     {{- range .Values.odoo.ingress.tls }}
     - hosts:
         {{- range .hosts }}
+        {{- if ne . "undefined"}}
         - {{ . | quote }}
+        {{- end }}
         {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
   rules:
     {{- range .Values.odoo.ingress.hosts }}
+    {{- if ne .host "undefined"}}
     - host: {{ .host | quote }}
       http:
         paths:
@@ -57,5 +60,6 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
+    {{- end }}
     {{- end }}
 {{- end }}
