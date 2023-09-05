@@ -13,5 +13,5 @@ data:
   MAIN_GIT_BRANCH: {{.Values.odoo.mainbranch}}
   MAIN_GIT_TOKEN: {{.Values.odoo.maingittoken}}
   CUSTOM_GIT: {{.Values.odoo.customgit}}
-  CUSTOM_GIT_BRANCH: {{.Values.odoo.customgitbranch}}
+  CUSTOM_GIT_BRANCH: {{.Values.odoo.customgitbranch | quote}}
   CUSTOM_GIT_TOKEN: {{.Values.odoo.customgittoken}}
