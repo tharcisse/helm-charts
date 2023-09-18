@@ -18,17 +18,7 @@ elif [[ "$MAIN_GIT_TOKEN" != "undefined" ]]; then
 else
     curl -sSL ${MAIN_GIT%"$suffix"}/tarball/${MAIN_GIT_BRANCH%"$branchsuffix"} | tar zxf - --strip-components=1
 fi
-MODULESTODOWNLOAD="undefined"
-if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
-    $MODULESTODOWNLOAD=$ODOO_EXTRA_MODULES
-fi
-if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
-    if [[ "$MODULESTODOWNLOAD" != "undefined" ]]; then
-        $MODULESTODOWNLOAD="${MODULESTODOWNLOAD} ${SERVER_WIDE_MODULES}"
-    else
-        $MODULESTODOWNLOAD=${SERVER_WIDE_MODULES}
-    fi
-fi
+
 directory="addons"
 if [ -d "$directory" ]
 then
@@ -50,6 +40,20 @@ then
             fi
         done
         ODOO_EXTRA_MODULES="${AV_EXTRA_MODULES[@]}"
+    fi
+    if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
+        array=($SERVER_WIDE_MODULES)
+        for i in "${array[@]}"; do
+            if [ -d $i ]
+            then
+                echo $i
+                FILE=${i}/requirements.txt
+                if test -f "$FILE"; then
+                    pip3 install -r ${i}/requirements.txt
+                fi
+                cp -R $i /mnt/extra-addons/
+            fi
+        done
     fi
     cd ../
     rm -r addons
