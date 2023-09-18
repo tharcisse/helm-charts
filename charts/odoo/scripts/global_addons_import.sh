@@ -44,3 +44,14 @@ then
     cd ../
     rm -r addons
 fi
+cd /mnt/extra-addons/
+if [ -d "sub_controller" ]
+then
+    cd sub_controller/data/
+    set -f
+    sed -i "s/SAAS_NUM_OF_USER/${SAAS_NUM_OF_USER}/gi" config.xml
+    sed -i "s/SAAS_MANAGER_URL/${SAAS_MANAGER_URL}/gi" config.xml
+    sed -i "s/SAAS_SUBSCRIPTION_NUM/${SAAS_SUBSCRIPTION_NUM}/gi" config.xml
+    sed -i "s/SAAS_SUBSCRIPTION_TRIAL/${SAAS_SUBSCRIPTION_TRIAL}/gi" config.xml
+    sed -i "s/SAAS_SUBSCRIPTION_ENDATE/${SAAS_SUBSCRIPTION_ENDATE}/gi" config.xml
+fi
