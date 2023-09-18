@@ -18,7 +18,17 @@ elif [[ "$MAIN_GIT_TOKEN" != "undefined" ]]; then
 else
     curl -sSL ${MAIN_GIT%"$suffix"}/tarball/${MAIN_GIT_BRANCH%"$branchsuffix"} | tar zxf - --strip-components=1
 fi
-
+MODULESTODOWNLOAD="undefined"
+if [[ "$ODOO_EXTRA_MODULES" != "undefined" ]]; then
+    $MODULESTODOWNLOAD=$ODOO_EXTRA_MODULES
+fi
+if [[ "$SERVER_WIDE_MODULES" != "undefined" ]]; then
+    if [[ "$MODULESTODOWNLOAD" != "undefined" ]]; then
+        $MODULESTODOWNLOAD="${MODULESTODOWNLOAD} ${SERVER_WIDE_MODULES}"
+    else
+        $MODULESTODOWNLOAD=${SERVER_WIDE_MODULES}
+    fi
+fi
 directory="addons"
 if [ -d "$directory" ]
 then
