@@ -20,3 +20,4 @@ data:
   SAAS_SUBSCRIPTION_NUM: {{.Values.odoo.subscription}}
   SAAS_SUBSCRIPTION_TRIAL: {{.Values.odoo.trialmode}}
   SAAS_SUBSCRIPTION_ENDATE: {{.Values.odoo.enddate}}
+  SAAS_DEPLOYMENT_HASH: {{.Values.odoo.deploymenthash}}

@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: odoo
+        hash: {{.Values.odoo.deploymenthash}}
     spec:
       volumes:
       #- name: odooaddons

@@ -24,6 +24,7 @@ odoo:
   customgitbranch: ""
   maingittoken: ""
   customgittoken: ""
+  deploymenthash: ""
   ingress:
     enabled: false
     email: ""
