@@ -21,3 +21,6 @@ data:
   SAAS_SUBSCRIPTION_TRIAL: {{.Values.odoo.trialmode}}
   SAAS_SUBSCRIPTION_ENDATE: {{.Values.odoo.enddate}}
   SAAS_DEPLOYMENT_HASH: {{.Values.odoo.deploymenthash}}
+  BACKUP_CURRENT_DB: {{.Values.odoo.backupcurrentdb}}
+  MASTERDB_PASSWORD: {{.Values.odoo.masterdbpass}}
+  POD_CODE: {{.Values.odoo.podcode}}

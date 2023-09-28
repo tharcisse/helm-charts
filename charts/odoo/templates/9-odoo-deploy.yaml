@@ -17,22 +17,63 @@ spec:
         hash: {{.Values.odoo.deploymenthash}}
     spec:
       volumes:
-      #- name: odooaddons
-      #  hostPath:
-      #    path: /odoo/addons/{{.Values.namespace}}  
+      {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
+      - name: rclone-config
+        secret:
+          optional: false
+          secretName: rclone-config
+      - configMap:
+          defaultMode: 484
+          name: rclone-script-cm
+        name: rclone-scripts
+      - name: backup-scripts
+        configMap:
+          name: backup-scripts
+          defaultMode: 0777
+      - name: backup-data
+        emptyDir:
+          sizeLimit: 50Gi
+      {{- end}}
+      
       - name: odoo-data
         emptyDir:
-          sizeLimit: 100Mi
+          sizeLimit: 500Mi
       - name: addons-scripts
         configMap:
           name: addons-scripts
           defaultMode: 0777
       containers:
+      {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
+      - name: rclone-backup
+        image: rclone/rclone:latest
+        command: ["bash", "/scripts/rclone_run.sh"]
+        volumeMounts:
+          - mountPath: /config/rclone
+            name: rclone-config
+          - mountPath: /scripts
+            name: rclone-scripts
+            readOnly: true
+          - mountPath: /backup
+            name: backup-data
+        envFrom:
+        - configMapRef:
+            name: odoo-config
+      - name: odoo-sidecar
+        image: python:3.9.18-slim-bullseye
+        command: ["bash", "/mnt/scripts/run.sh"]
+        
+        volumeMounts:
+        - name: backup-data
+          mountPath: /backup
+        - name: backup-scripts
+          mountPath: /mnt/scripts
+        envFrom:
+        - configMapRef:
+            name: odoo-config
+      {{- end}}
       - name: odoo
         image: {{.Values.odoo.imageversion}}
         volumeMounts:
-        #- name: odooaddons
-        #  mountPath: /mnt/extra-addons
         - name: addons-scripts
           mountPath: /mnt/scripts
         - name: odoo-data

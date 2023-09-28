@@ -10,7 +10,16 @@ postgres:
   cpulimit: 3
   memoryrequest: 1Gi
   memorylimit: 4G
-  
+
+s3object:
+  bucketname: ""
+  name: ""
+  provider: ""
+  type: ""
+  accesskey: ""
+  secretkey: ""
+  endpoint: ""
+
 odoo: 
   imageversion: odoo:16
   subdomain: subdomain
@@ -25,6 +34,9 @@ odoo:
   maingittoken: ""
   customgittoken: ""
   deploymenthash: ""
+  masterdbpass: ""
+  backupcurrentdb: false
+  podcode: ""
   ingress:
     enabled: false
     email: ""
