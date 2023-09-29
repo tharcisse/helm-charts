@@ -29,7 +29,7 @@ check_config "db_host" "$HOST"
 check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
-check_config "admin_passwd" "$MASTERDB_PASSWORD"
+
 
 ADD_ARGS=()
 
@@ -65,6 +65,9 @@ if [[ -n "$ODOO_DB" ]]; then
     #ADD_ARGS+=("all")
     
 fi
+
+ADD_ARGS+=("--admin_passwd")
+ADD_ARGS+=("${MASTERDB_PASSWORD}")
 
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
 

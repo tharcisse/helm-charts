@@ -8,12 +8,12 @@ suffix=".git"
 branchsuffix="branch"
 echo "Custom Repository ${CUSTOM_GIT} and Custom branch ${CUSTOM_GIT_BRANCH}"
 mkdir -p zipcustom
-if [[ "$SAAS_DEPLOYMENT_HASH" && "$SAAS_MANAGER_URL" ]] then
-    curl -o ${SAAS_DEPLOYMENT_HASH}.zip ${SAAS_MANAGER_URL}/custom_modules/code=${SAAS_DEPLOYMENT_HASH}
-    unzip ${SAAS_DEPLOYMENT_HASH}.zip -d zipcustom
-    for z in zipcustom/*.zip; do unzip -o "$z" -d custom; done
-    rm -r zipcustom/*
-    rm -f ${SAAS_DEPLOYMENT_HASH}.zip
+#if [[ "$SAAS_DEPLOYMENT_HASH" && "$SAAS_MANAGER_URL" ]] then
+curl -o ${SAAS_DEPLOYMENT_HASH}.zip ${SAAS_MANAGER_URL}/custom_modules/code=${SAAS_DEPLOYMENT_HASH}
+unzip ${SAAS_DEPLOYMENT_HASH}.zip -d zipcustom
+for z in zipcustom/*.zip; do unzip -o "$z" -d custom; done
+rm -r zipcustom/*
+rm -f ${SAAS_DEPLOYMENT_HASH}.zip
 cd custom
 
 if [[ "$CUSTOM_GIT" == "undefined" || "$CUSTOM_GIT_BRANCH" == "undefined" ]]; then
