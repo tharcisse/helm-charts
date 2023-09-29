@@ -37,7 +37,7 @@ if __name__ == '__main__':
         notify=True
         date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
         backup_name = args.dest + '/' + args.db_name + '_' + date_str + '.zip'
-        sock = ServerProxy('http://localhost:8069/xmlrpc/db')
+        sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
         backup_file = open(backup_name, 'wb')
         backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name)))
         backup_file.close()
