@@ -3,7 +3,7 @@ entries:
   kube-webshell:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.467483212+03:00"
+    created: "2023-09-29T11:33:35.64361934+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: 38dd6f1e5715531cd759cf0ccc0a6f3d2f6eb1d296f42aa1111094d0498dc875
     keywords:
@@ -21,7 +21,7 @@ entries:
     version: 0.2.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.465897147+03:00"
+    created: "2023-09-29T11:33:35.642578206+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: cb355d7e4091ec2920c653a191e1abdabf80079bdb0cd9829d433858c5075690
     keywords:
@@ -39,7 +39,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.464377102+03:00"
+    created: "2023-09-29T11:33:35.641827911+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: abd33d7063e2f2112f2b6e51fba48aa5b45dd82b1dcdcb80a9c45d0b02b7651a
     keywords:
@@ -57,7 +57,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.4623804+03:00"
+    created: "2023-09-29T11:33:35.640866389+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: f9e4a0651d996a949827d3c87dd79a9a1075552b6bdd0d627ad3dbfa577700bf
     keywords:
@@ -75,7 +75,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.461308546+03:00"
+    created: "2023-09-29T11:33:35.63999353+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: b790e1671085fd43329362595d9066275daa1df4b7e9bbe355584dedd6050a1d
     keywords:
@@ -93,7 +93,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.460254384+03:00"
+    created: "2023-09-29T11:33:35.639235985+03:00"
     description: Kubernetes WebShell Terminal By Sahaba
     digest: e0e5245788d86a11118ba3172429b71cc210a7398c89e24b38061009defa0678
     keywords:
@@ -112,7 +112,17 @@ entries:
   odoo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.497527206+03:00"
+    created: "2023-09-29T11:33:35.683662035+03:00"
+    description: Odoo SaaS
+    digest: c29506dd150bd9e53110f5b71912d7d8303c4b41c50e729e53c83a185edf6f2b
+    name: odoo
+    type: application
+    urls:
+    - https://tharcisse.github.io/helm-charts/odoo-0.3.05.tgz
+    version: 0.3.05
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-09-29T11:33:35.682484624+03:00"
     description: Odoo SaaS
     digest: e0bf8c3d1d9f76db0b1bc9a0a897eeb6e2af58e111549b9158d40b0af3206f51
     name: odoo
@@ -122,7 +132,7 @@ entries:
     version: 0.3.04
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.496383854+03:00"
+    created: "2023-09-29T11:33:35.680093449+03:00"
     description: Odoo SaaS
     digest: a2ad1a931393d53f122e6fc01b41e3f9c1763874ab57f64a37a83d661b4f7ba3
     name: odoo
@@ -132,7 +142,7 @@ entries:
     version: 0.3.03
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.495177647+03:00"
+    created: "2023-09-29T11:33:35.678035009+03:00"
     description: Odoo SaaS
     digest: 8b265b5653384ff45990aef27e8a6761073f997188d7daa9660d16a37b50e669
     name: odoo
@@ -142,7 +152,7 @@ entries:
     version: 0.3.02
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.493869044+03:00"
+    created: "2023-09-29T11:33:35.67507985+03:00"
     description: Odoo SaaS
     digest: 324813e0dc7dc5ba9c106f74766ee1b16b9274b098c39a73ba6f2a0c466a11b2
     name: odoo
@@ -152,7 +162,7 @@ entries:
     version: 0.3.01
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.484850121+03:00"
+    created: "2023-09-29T11:33:35.662248799+03:00"
     description: Odoo SaaS
     digest: e469bf85350beb3e0e7fc544574743d1456c1c80d62340c27bbaa9defc010cd0
     name: odoo
@@ -162,7 +172,7 @@ entries:
     version: 0.2.21
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.483942541+03:00"
+    created: "2023-09-29T11:33:35.660381626+03:00"
     description: Odoo SaaS
     digest: 04e7cd92b610f1f1dbb087fdf3c2548302d40b56e465ed3d4ece7e280c278864
     name: odoo
@@ -172,7 +182,7 @@ entries:
     version: 0.2.20
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.481549742+03:00"
+    created: "2023-09-29T11:33:35.655941339+03:00"
     description: Odoo SaaS
     digest: e784648ddeda61d335a2bfbc869c11b8a0e70f01abcdf986832de8dd42a4294a
     name: odoo
@@ -182,7 +192,7 @@ entries:
     version: 0.2.19
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.478623981+03:00"
+    created: "2023-09-29T11:33:35.654975706+03:00"
     description: Odoo SaaS
     digest: 41c98d4689e4975b199345b678cd39ca8f36b180ca9156084112d9aca59343d9
     name: odoo
@@ -192,7 +202,7 @@ entries:
     version: 0.2.18
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.476994616+03:00"
+    created: "2023-09-29T11:33:35.65403315+03:00"
     description: Odoo SaaS
     digest: 05b9cd0edf9577df5f92550100f87e9e2e54c5c2cfa9047cb41f2c4218d3941b
     name: odoo
@@ -202,7 +212,7 @@ entries:
     version: 0.2.17
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.476012611+03:00"
+    created: "2023-09-29T11:33:35.653175437+03:00"
     description: Odoo SaaS
     digest: 82cfab911e435ceb80b27333a6bad415da9520658d685c03b20386d637371445
     name: odoo
@@ -212,7 +222,7 @@ entries:
     version: 0.2.16
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.475216501+03:00"
+    created: "2023-09-29T11:33:35.652266416+03:00"
     description: Odoo SaaS
     digest: 187569c3ece766eaf64d68ea6aee8756dc579b33e879e1508b4ee7767519eac6
     name: odoo
@@ -222,7 +232,7 @@ entries:
     version: 0.2.15
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.474460069+03:00"
+    created: "2023-09-29T11:33:35.651386574+03:00"
     description: Odoo SaaS
     digest: 53c2f86417dd6bb19386ac1f62d07c58c9d81bd6fc8d468b6e3a6a80237189eb
     name: odoo
@@ -232,7 +242,7 @@ entries:
     version: 0.2.14
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.473720433+03:00"
+    created: "2023-09-29T11:33:35.650375497+03:00"
     description: Odoo SaaS
     digest: 37d23ef3cd938320590ee641569cc3848e0fddca3da6de3ded5aa70355381145
     name: odoo
@@ -242,7 +252,7 @@ entries:
     version: 0.2.13
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.472950171+03:00"
+    created: "2023-09-29T11:33:35.649099024+03:00"
     description: Odoo SaaS
     digest: 173c3f5f6c51736eb770b5888faac975792f69ab299d63a1015ff7098dcac789
     name: odoo
@@ -252,7 +262,7 @@ entries:
     version: 0.2.12
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.472150955+03:00"
+    created: "2023-09-29T11:33:35.64773535+03:00"
     description: Odoo SaaS
     digest: f514cfa845486619df03a5b14417a68da70ac98bf60c9bd1ae64801ad87c7409
     name: odoo
@@ -262,7 +272,7 @@ entries:
     version: 0.2.11
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.471376198+03:00"
+    created: "2023-09-29T11:33:35.64629329+03:00"
     description: Odoo SaaS
     digest: 8dd3c1cc4e00dd555f02ed49474b25972b08d22c92e2d0ffce3dd5a70fa1c41c
     name: odoo
@@ -272,7 +282,7 @@ entries:
     version: 0.2.10
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.492510007+03:00"
+    created: "2023-09-29T11:33:35.67227306+03:00"
     description: Odoo SaaS
     digest: c5d2721a2ba71de42c020da02d28a18906ab585ecb248c219fc6bd9987ed6151
     name: odoo
@@ -282,7 +292,7 @@ entries:
     version: 0.2.9
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.491705177+03:00"
+    created: "2023-09-29T11:33:35.670447251+03:00"
     description: Odoo SaaS
     digest: 62c18ff8dcffeff0e58db9968445f686807504ac1fd71516f12392688a7744cc
     name: odoo
@@ -292,7 +302,7 @@ entries:
     version: 0.2.8
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.490501857+03:00"
+    created: "2023-09-29T11:33:35.669215544+03:00"
     description: Odoo SaaS
     digest: 55f6727a9cd2e6eb7d0cb4f0fc0e48153cc356b6ed42ebc77838eff681cf01bf
     name: odoo
@@ -302,7 +312,7 @@ entries:
     version: 0.2.7
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.489542299+03:00"
+    created: "2023-09-29T11:33:35.667738433+03:00"
     description: Odoo SaaS
     digest: 50adbbfdb0a0ea17caa214bbee0bbb0cabd1e18d182e1b050153c7993f75cae3
     name: odoo
@@ -312,7 +322,7 @@ entries:
     version: 0.2.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.488585096+03:00"
+    created: "2023-09-29T11:33:35.666411274+03:00"
     description: Odoo SaaS
     digest: 7b119a3fe42e56154ed55ea63ef384e1276b60f02cb8e587aa1ff497f5e00efd
     name: odoo
@@ -322,7 +332,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.487453317+03:00"
+    created: "2023-09-29T11:33:35.664916777+03:00"
     description: Odoo SaaS
     digest: d4fe564d9c3e3b5ec0432382992eddabdb179558276fae4eef6c90480af5cf26
     name: odoo
@@ -332,7 +342,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.486148163+03:00"
+    created: "2023-09-29T11:33:35.663605179+03:00"
     description: Odoo SaaS
     digest: 6a42f357ef771353a44d31778b9d6ca6c46e3ef6bed96dac3435507b55a043b5
     name: odoo
@@ -342,7 +352,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.482792787+03:00"
+    created: "2023-09-29T11:33:35.657383531+03:00"
     description: Odoo SaaS
     digest: c9afdb9e30ed4c341a614542cf42c0f64c6a8b6d9c3a53b7a256448509466590
     name: odoo
@@ -352,7 +362,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.469594759+03:00"
+    created: "2023-09-29T11:33:35.644972366+03:00"
     description: Odoo SaaS
     digest: cfb1be9e910cfcefdb0845041d3a538eaaf4e097ef54b68324977add7a0423b5
     name: odoo
@@ -363,7 +373,7 @@ entries:
   saasconfig:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.499298173+03:00"
+    created: "2023-09-29T11:33:35.685358023+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 726fe0927ab775f469ba4e375797d9c452cc9811050454315ee603491512e4d2
     name: saasconfig
@@ -373,7 +383,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.506015548+03:00"
+    created: "2023-09-29T11:33:35.691486927+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 49e3be4e1bf03de600f444b4be77662c59f5806402130ace6fe35ec4787c8d78
     name: saasconfig
@@ -383,7 +393,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.505094751+03:00"
+    created: "2023-09-29T11:33:35.690479718+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 0c15e16b43d46466429652678167aec2d20b1622d925c87d48a09352e2c8f9a1
     name: saasconfig
@@ -393,7 +403,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.504051801+03:00"
+    created: "2023-09-29T11:33:35.68914259+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 35609ab9d70fbce92c4717ec0212b570d9cf212d81f35ff4cec6c1fa3fdcf4cd
     name: saasconfig
@@ -403,7 +413,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.503102709+03:00"
+    created: "2023-09-29T11:33:35.687796245+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: bd79411b123f43d781a00bf6b4fe4cc6a68a14c91b76125f778625d3d89f9088
     name: saasconfig
@@ -413,7 +423,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.502049318+03:00"
+    created: "2023-09-29T11:33:35.686646189+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 4d9f80025ee884596dd151f31e86b5cabe84f1efb8622e87ecae2fb48235e638
     name: saasconfig
@@ -423,7 +433,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.50096217+03:00"
+    created: "2023-09-29T11:33:35.685964373+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 11c22655848daca1d2c919d774e680cc7e76e85aa80c6dd66ddc53bc85010e0a
     name: saasconfig
@@ -433,7 +443,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.498720426+03:00"
+    created: "2023-09-29T11:33:35.684786104+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 075bcc0d7ff6d9e0d6d082b2cc3bedacb5bf9af57616022c82d34271899322e3
     name: saasconfig
@@ -443,7 +453,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-29T11:25:10.49810126+03:00"
+    created: "2023-09-29T11:33:35.68420093+03:00"
     description: Odoo SaaS Platform infrastructure Chart
     digest: 8664e3166585ce2274518d3ba6957b1f0f8e7097fca38f2004d7238d00ae547c
     name: saasconfig
@@ -451,4 +461,4 @@ entries:
     urls:
     - https://tharcisse.github.io/helm-charts/saasconfig-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-29T11:25:10.459082841+03:00"
+generated: "2023-09-29T11:33:35.638205195+03:00"
