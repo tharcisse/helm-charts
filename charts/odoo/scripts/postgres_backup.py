@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
-import xmlrpclib
+from xmlrpc.client import Transport as XMLTransport
+from xmlrpc.client import SafeTransport as XMLSafeTransport
+from xmlrpc.client import ServerProxy as XMLServerProxy
+from xmlrpc.client import _Method as XML_Method 
 import base64
 import argparse
 from datetime import datetime
@@ -34,7 +37,7 @@ if __name__ == '__main__':
         notify=True
         date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
         backup_name = args.dest + '/' + args.db_name + '_' + date_str + '.zip'
-        sock = xmlrpclib.ServerProxy('http://localhost:8069/xmlrpc/db')
+        sock = ServerProxy('http://localhost:8069/xmlrpc/db')
         backup_file = open(backup_name, 'wb')
         backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name)))
         backup_file.close()

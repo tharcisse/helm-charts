@@ -15,7 +15,6 @@ data:
   CUSTOM_GIT: {{.Values.odoo.customgit}}
   CUSTOM_GIT_BRANCH: {{.Values.odoo.customgitbranch | quote}}
   CUSTOM_GIT_TOKEN: {{.Values.odoo.customgittoken}}
-  SAAS_NUM_OF_USER: {{.Values.odoo.usercount}}
   SAAS_MANAGER_URL: {{.Values.odoo.saasurl}}
   SAAS_SUBSCRIPTION_NUM: {{.Values.odoo.subscription}}
   SAAS_SUBSCRIPTION_TRIAL: {{.Values.odoo.trialmode}}
