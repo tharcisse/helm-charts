@@ -1,5 +1,6 @@
 #!/bin/bash
 set -exo pipefail
+pip3 install requests
 while : 
 do
     BACKUP_ARGS=()
