@@ -1,8 +1,6 @@
 #!/bin/bash
 set -exo pipefail
 pip3 install requests
-while : 
-do
     BACKUP_ARGS=()
     BACKUP_ARGS+=("--db_name")
     BACKUP_ARGS+=("${ODOO_DB}")
@@ -18,7 +16,8 @@ do
 
     BACKUP_ARGS+=("--pod_code")
     BACKUP_ARGS+=("${POD_CODE}")
-
+while : 
+do
     /mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
-    sleep 10
+    sleep 1m
 done;

@@ -9,6 +9,6 @@ do
             rclone sync -P $f ${PROVIDER}:${BUCKET_NAME}/{{.Values.namespace}}
             rm -f $f       
         done
-        sleep 5m
+        sleep 2m
     fi
 done

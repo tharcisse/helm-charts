@@ -8,6 +8,7 @@ import base64
 import argparse
 from datetime import datetime
 import requests
+import json
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
@@ -27,6 +28,10 @@ if __name__ == '__main__':
     response = requests.get(args.saas_manager + '/backup_checker', json=payload,
                             headers={'content-Type': 'application/json'}, timeout=60)
     do_backup = False
+    print(response)
+    print('RESPONSE JSON')
+    print(json.dumps(response.json(),indent=4))
+    
     if response.status_code == 200:
         response = response.json()
         print(response)
