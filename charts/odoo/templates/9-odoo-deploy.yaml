@@ -97,5 +97,4 @@ spec:
           value: odoo
         - name: PASSWORD
           value: {{.Values.postgres.password}}
-        - name: ODOO_DB
-          value: {{.Values.namespace}}
+        
