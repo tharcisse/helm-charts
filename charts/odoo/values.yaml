@@ -35,7 +35,7 @@ odoo:
   customgittoken: ""
   deploymenthash: ""
   masterdbpass: ""
-  backupcurrentdb: false
+  backupcurrentdb: "NO"
   podcode: ""
   ingress:
     enabled: false
