@@ -33,7 +33,7 @@ if __name__ == '__main__':
     print(json.dumps(response.json(),indent=4))
     response=response.json()
 
-    if response.status == 200:
+    if response.get('status',404) == 200:
         if response.get('data', {}).get('backup_requested',False):
             do_backup = True
     if not do_backup:
