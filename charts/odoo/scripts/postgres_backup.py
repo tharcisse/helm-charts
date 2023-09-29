@@ -31,11 +31,10 @@ if __name__ == '__main__':
     print(response)
     print('RESPONSE JSON')
     print(json.dumps(response.json(),indent=4))
-    
-    if response.status_code == 200:
-        response = response.json()
-        print(response)
-        if response.get('backup_requested', False):
+    response=response.json()
+
+    if response.status == 200:
+        if response.get('data', {}).get('backup_requested',False):
             do_backup = True
     if not do_backup:
         print('No backup requested')
