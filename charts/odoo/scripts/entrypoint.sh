@@ -66,7 +66,7 @@ if [[ -n "$ODOO_DB" ]]; then
     
 fi
 
-printf 'admin_passwd = ${MASTERDB_PASSWORD}\n' >> "$ODOO_RC"
+printf "admin_passwd = ${MASTERDB_PASSWORD}\n" >> "$ODOO_RC"
 
 
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
