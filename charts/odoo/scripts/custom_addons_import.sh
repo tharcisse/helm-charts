@@ -11,7 +11,11 @@ mkdir -p zipcustom
 #if [[ "$SAAS_DEPLOYMENT_HASH" && "$SAAS_MANAGER_URL" ]] then
 curl -o ${SAAS_DEPLOYMENT_HASH}.zip ${SAAS_MANAGER_URL}/custom_modules?code=${SAAS_DEPLOYMENT_HASH}
 /mnt/scripts/unzip.py --f ${SAAS_DEPLOYMENT_HASH}.zip --d zipcustom
-for z in zipcustom/*.zip; do /mnt/scripts/unzip.py --f "$z" --d custom; done
+ls zipcustom
+for z in zipcustom/*.zip; do
+    echo "$z"
+    /mnt/scripts/unzip.py --f "$z" --d custom; 
+done
 rm -r zipcustom/*
 rm -f ${SAAS_DEPLOYMENT_HASH}.zip
 cd custom
