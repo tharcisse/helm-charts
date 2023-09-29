@@ -15,6 +15,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--master_password', required=True)
     arg_parser.add_argument('--dest', required=True)
     arg_parser.add_argument('--saas_manager', required=True)
+    arg_parser.add_argument('--pod_code', required=True)
     #arg_parser.add_argument('--notify', required=True)
     notify = False
 

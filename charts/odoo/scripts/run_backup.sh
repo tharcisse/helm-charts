@@ -16,7 +16,7 @@ do
     BACKUP_ARGS+=("--saas_manager")
     BACKUP_ARGS+=("${SAAS_MANAGER_URL}")
 
-    BACKUP_ARGS+=("--saas_manager")
+    BACKUP_ARGS+=("--pod_code")
     BACKUP_ARGS+=("${POD_CODE}")
 
     /mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
