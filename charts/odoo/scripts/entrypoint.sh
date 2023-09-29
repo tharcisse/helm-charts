@@ -66,12 +66,13 @@ if [[ -n "$ODOO_DB" ]]; then
     
 fi
 
+printf 'admin_passwd = ${MASTERDB_PASSWORD}\n' >> "$ODOO_RC"
 ADD_ARGS+=("--admin_passwd")
 ADD_ARGS+=("${MASTERDB_PASSWORD}")
 
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
 
-echo "ODOO ARGUMENTS: ${ODOO_ARGS[@]}"
+echo "ODOO ARGUMENTS: $@ ${ODOO_ARGS[@]}"
 
 case "$1" in
 -- | odoo)
