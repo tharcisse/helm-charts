@@ -5,6 +5,6 @@ metadata:
   name: rclone-script-cm
 data:
 S3BUCKET_NAME: {{.Values.s3object.bucketname}}
-S3PROVIDER : {{.Values.s3object.provider}}
+S3PROVIDER: {{.Values.s3object.provider}}
 {{ (.Files.Glob "scripts/rclone_run.sh").AsConfig | indent 2 }}
 {{- end }}
