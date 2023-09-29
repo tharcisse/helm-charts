@@ -46,7 +46,7 @@ spec:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
       - name: rclone-backup
         image: rclone/rclone:latest
-        command: ["bash", "/scripts/rclone_run.sh"]
+        command: ["/bin/sh", "-c", "/scripts/rclone_run.sh"]
         volumeMounts:
           - mountPath: /config/rclone
             name: rclone-config

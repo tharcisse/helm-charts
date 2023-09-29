@@ -1,6 +1,5 @@
 #!/bin/bash
 set -exo pipefail
-pip3 install xmlrpclib
 while True; do
     BACKUP_ARGS=()
     BACKUP_ARGS+=("--db_name")
