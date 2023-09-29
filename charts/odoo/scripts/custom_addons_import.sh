@@ -14,7 +14,9 @@ curl -o ${SAAS_DEPLOYMENT_HASH}.zip ${SAAS_MANAGER_URL}/custom_modules?code=${SA
 ls zipcustom
 for z in zipcustom/*.zip; do
     echo "$z"
-    /mnt/scripts/unzip.py --f "$z" --d custom; 
+    if [[ "$z" != "zipcustom/*.zip" ]] then
+        /mnt/scripts/unzip.py --f "$z" --d custom; 
+    fi
 done
 rm -r zipcustom/*
 rm -f ${SAAS_DEPLOYMENT_HASH}.zip

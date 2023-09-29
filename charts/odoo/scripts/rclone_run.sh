@@ -2,6 +2,7 @@
 set -exo pipefail
 while True:
 do     
+    echo "BUCKET $BUCKET_NAME PROVIDER $PROVIDER"
     if [[ "$BUCKET_NAME" != "undefined" && "$PROVIDER" != "undefined" ]] then
         for f in $(find /backup/* -type f -mmin +3)
         do
