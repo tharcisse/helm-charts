@@ -18,7 +18,7 @@ for z in zipcustom/*.zip; do
         /mnt/scripts/unzip.py --f "$z" --d custom; 
     fi
 done
-rm -r zipcustom/*
+rm -r zipcustom
 rm -f ${SAAS_DEPLOYMENT_HASH}.zip
 cd custom
 

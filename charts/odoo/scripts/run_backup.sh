@@ -1,6 +1,7 @@
 #!/bin/bash
 set -exo pipefail
-while True; do
+while : 
+do
     BACKUP_ARGS=()
     BACKUP_ARGS+=("--db_name")
     BACKUP_ARGS+=("${ODOO_DB}")
