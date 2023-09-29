@@ -59,11 +59,10 @@ spec:
         - configMapRef:
             name: odoo-config
         env:
-        - name: S3BUCKET_NAME
+        - name: BUCKET_NAME
           value: {{.Values.s3object.bucketname}}
-        - name: S3PROVIDER
+        - name: PROVIDER
           value: {{.Values.s3object.provider}}
-S3PROVIDER: {{.Values.s3object.provider}}
       - name: odoo-sidecar
         image: python:3.9.18-slim-bullseye
         command: ["bash", "/mnt/scripts/run.sh"]
