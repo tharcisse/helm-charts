@@ -6,20 +6,20 @@ metadata:
   labels:
     app: odoo
 data:
-  ODOO_EXTRA_MODULES: {{.Values.odoo.extramodules}}
-  ODOO_NATIVE_MODULES: {{.Values.odoo.nativemodules}}
-  SERVER_WIDE_MODULES: {{.Values.odoo.serverwidemodules}}
-  MAIN_GIT: {{.Values.odoo.mainrepo}}
-  MAIN_GIT_BRANCH: {{.Values.odoo.mainbranch}}
-  MAIN_GIT_TOKEN: {{.Values.odoo.maingittoken}}
-  CUSTOM_GIT: {{.Values.odoo.customgit}}
+  ODOO_EXTRA_MODULES: {{.Values.odoo.extramodules | quote }}
+  ODOO_NATIVE_MODULES: {{.Values.odoo.nativemodules | quote }}
+  SERVER_WIDE_MODULES: {{.Values.odoo.serverwidemodules | quote }}
+  MAIN_GIT: {{.Values.odoo.mainrepo | quote }}
+  MAIN_GIT_BRANCH: {{.Values.odoo.mainbranch | quote }}
+  MAIN_GIT_TOKEN: {{.Values.odoo.maingittoken | quote }}
+  CUSTOM_GIT: {{.Values.odoo.customgit | quote }}
   CUSTOM_GIT_BRANCH: {{.Values.odoo.customgitbranch | quote}}
-  CUSTOM_GIT_TOKEN: {{.Values.odoo.customgittoken}}
-  SAAS_MANAGER_URL: {{.Values.odoo.saasurl}}
-  SAAS_SUBSCRIPTION_NUM: {{.Values.odoo.subscription}}
-  SAAS_SUBSCRIPTION_TRIAL: {{.Values.odoo.trialmode}}
-  SAAS_SUBSCRIPTION_ENDATE: {{.Values.odoo.enddate}}
-  SAAS_DEPLOYMENT_HASH: {{.Values.odoo.deploymenthash}}
-  BACKUP_CURRENT_DB: {{.Values.odoo.backupcurrentdb}}
-  MASTERDB_PASSWORD: {{.Values.odoo.masterdbpass}}
-  POD_CODE: {{.Values.odoo.podcode}}
+  CUSTOM_GIT_TOKEN: {{.Values.odoo.customgittoken | quote }}
+  SAAS_MANAGER_URL: {{.Values.odoo.saasurl | quote }}
+  SAAS_SUBSCRIPTION_NUM: {{.Values.odoo.subscription | quote }}
+  SAAS_SUBSCRIPTION_TRIAL: {{.Values.odoo.trialmode | quote }}
+  SAAS_SUBSCRIPTION_ENDATE: {{.Values.odoo.enddate | quote }}
+  SAAS_DEPLOYMENT_HASH: {{.Values.odoo.deploymenthash | quote }}
+  BACKUP_CURRENT_DB: {{.Values.odoo.backupcurrentdb | quote }}
+  MASTERDB_PASSWORD: {{.Values.odoo.masterdbpass | quote }}
+  POD_CODE: {{.Values.odoo.podcode | quote }}
