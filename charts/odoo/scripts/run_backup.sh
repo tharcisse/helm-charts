@@ -18,6 +18,6 @@ while True; do
     BACKUP_ARGS+=("--saas_manager")
     BACKUP_ARGS+=("${POD_CODE}")
 
-    postgres_backup.py ${BACKUP_ARGS[@]}  
+    /mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
     sleep 10
 done;

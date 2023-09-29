@@ -13,5 +13,6 @@ data:
 {{ (.Files.Glob "scripts/entrypoint.sh").AsConfig | indent 2 }}
 {{ (.Files.Glob "scripts/odoo.conf").AsConfig | indent 2 }}
 {{ (.Files.Glob "scripts/wait-for-psql.py").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/unzip.py").AsConfig | indent 2 }}
 
 
