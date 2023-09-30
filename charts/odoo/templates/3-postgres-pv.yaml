@@ -10,5 +10,6 @@ spec:
     storage: {{.Values.postgres.storage}} # Sets PV Volume
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
   hostPath:
     path: "/data/{{.Values.namespace}}" # Sets the volume's path
