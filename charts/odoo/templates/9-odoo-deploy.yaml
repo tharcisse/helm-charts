@@ -64,7 +64,7 @@ spec:
         - name: PROVIDER
           value: {{.Values.s3object.provider | quote }}
         - name': STNAME
-          value: {{.Values.s2object.name | quote}}
+          value: {{.Values.s3object.name | quote}}
       - name: odoo-sidecar
         image: python:3.9.18-slim-bullseye
         command: ["bash", "/mnt/scripts/run_backup.sh"]
