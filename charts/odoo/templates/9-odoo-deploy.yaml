@@ -63,7 +63,7 @@ spec:
           value: {{.Values.s3object.bucketname | quote }}
         - name: PROVIDER
           value: {{.Values.s3object.provider | quote }}
-        - name': STNAME
+        - name: STNAME
           value: {{.Values.s3object.name | quote}}
       - name: odoo-sidecar
         image: python:3.9.18-slim-bullseye
