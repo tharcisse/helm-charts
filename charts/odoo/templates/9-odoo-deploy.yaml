@@ -33,6 +33,9 @@ spec:
       - name: backup-data
         emptyDir:
           sizeLimit: 50Gi
+      - name: restore-data
+        emptyDir:
+          sizeLimit: 50Gi
       {{- end}}
       
       - name: odoo-data
@@ -55,6 +58,8 @@ spec:
             readOnly: true
           - mountPath: /backup
             name: backup-data
+          - mountPath: /restore
+            name: restore-data
         envFrom:
         - configMapRef:
             name: odoo-config
@@ -65,13 +70,15 @@ spec:
           value: {{.Values.s3object.provider | quote }}
         - name: STNAME
           value: {{.Values.s3object.name | quote}}
-      - name: odoo-sidecar
+      - name: odoo-backup
         image: python:3.9.18-slim-bullseye
         command: ["bash", "/mnt/scripts/run_backup.sh"]
         
         volumeMounts:
         - name: backup-data
           mountPath: /backup
+        - mountPath: /restore
+          name: restore-data
         - name: backup-scripts
           mountPath: /mnt/scripts
         envFrom:

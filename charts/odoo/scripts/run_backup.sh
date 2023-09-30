@@ -19,5 +19,6 @@ pip3 install requests
 while : 
 do
     /mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
-    sleep 1m
+    /mnt/scripts/postgres_restore.py ${BACKUP_ARGS[@]}  
+    sleep 30
 done;
