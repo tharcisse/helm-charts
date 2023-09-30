@@ -42,14 +42,7 @@ if __name__ == '__main__':
         backup_file.close()
         print('Backup file created')
 
-        if notify:
-            payload = {
-                'namespace': args.db_name,
-                'backup_name': backup_name,
-                'code': args.pod_code
-            }
-            requests.post(args.saas_manager + '/backup_notifier', json=payload, timeout=60)
-
+       
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
         restore_file = restore_file.replace('.zip', 't_restore')

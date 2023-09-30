@@ -35,11 +35,4 @@ if __name__ == '__main__':
             except OSError:
                 pass
             notify = True
-    if notify:
-        print('File restored')
-        payload = {
-            'namespace': args.db_name,
-            'retore_name': restore_name,
-            'code': args.pod_code
-        }
-        requests.post(args.saas_manager + '/restore_notifier', json=payload, timeout=60)
+   
