@@ -26,9 +26,14 @@ if __name__ == '__main__':
     for filename in os.listdir(directory):
         if '.zip' in filename:
             restore_name = filename
-            restore_file = open(os.path.join(directory, filename), 'rb')
+            file_full_name = os.path.join(directory, filename)
+            restore_file = open(file_full_name, 'rb')
             sock.restore(args.master_password, args.db_name, base64.b64encode(restore_file.read()).decode())
             restore_file.close()
+            try:
+                os.remove(file_full_name)
+            except OSError:
+                pass
             notify = True
     if notify:
         print('File restored')
