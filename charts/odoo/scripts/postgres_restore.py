@@ -25,6 +25,7 @@ if __name__ == '__main__':
     restore_name = ''
     for filename in os.listdir(directory):
         if '.zip' in filename:
+            print(f"Resore file found {filename}" )
             restore_name = filename
             file_full_name = os.path.join(directory, filename)
             restore_file = open(file_full_name, 'rb')

@@ -1,5 +1,6 @@
 #!/bin/sh
 set -exo pipefail
+apk add --update curl
 while :
 do     
     echo "BUCKET $BUCKET_NAME PROVIDER $STNAME"
