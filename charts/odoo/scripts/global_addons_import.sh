@@ -63,9 +63,9 @@ if [ -d "sub_controller" ]
 then
     cd sub_controller/data/
     set -f
-    sed -i "s/POD_CODE/${POD_CODE}/gi" config.xml
-    sed -i "s/SAAS_MANAGER_URL/${SAAS_MANAGER_URL}/gi" config.xml
-    sed -i "s/SAAS_SUBSCRIPTION_NUM/${SAAS_SUBSCRIPTION_NUM}/gi" config.xml
-    sed -i "s/SAAS_SUBSCRIPTION_TRIAL/${SAAS_SUBSCRIPTION_TRIAL}/gi" config.xml
-    sed -i "s/SAAS_SUBSCRIPTION_ENDATE/${SAAS_SUBSCRIPTION_ENDATE}/gi" config.xml
+    awk -v vPOD_CODE="$POD_CODE" '{gsub("POD_CODE",vPOD_CODE); print}' config.xml  > config2.xml && mv config2.xml config.xml
+    awk -v vSAAS_MANAGER_URL="$SAAS_MANAGER_URL" '{gsub("SAAS_MANAGER_URL",vSAAS_MANAGER_URL); print}' config.xml  > config2.xml && mv config2.xml config.xml
+    awk -v vSAAS_SUBSCRIPTION_NUM="$SAAS_SUBSCRIPTION_NUM" '{gsub("SAAS_SUBSCRIPTION_NUM",vSAAS_SUBSCRIPTION_NUM); print}' config.xml  > config2.xml && mv config2.xml config.xml
+    awk -v vSAAS_SUBSCRIPTION_TRIAL="$SAAS_SUBSCRIPTION_TRIAL" '{gsub("SAAS_SUBSCRIPTION_TRIAL",vSAAS_SUBSCRIPTION_TRIAL); print}' config.xml  > config2.xml && mv config2.xml config.xml
+    awk -v vSAAS_SUBSCRIPTION_ENDATE="$SAAS_SUBSCRIPTION_ENDATE" '{gsub("SAAS_SUBSCRIPTION_ENDATE",vSAAS_SUBSCRIPTION_ENDATE); print}' config.xml  > config2.xml && mv config2.xml config.xml
 fi
