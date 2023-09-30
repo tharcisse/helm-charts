@@ -24,10 +24,14 @@ if __name__ == '__main__':
     response = requests.get(args.saas_manager + '/backup_checker', json=payload,
                             headers={'content-Type': 'application/json'}, timeout=60)
     do_backup = False
-
-    if response.get('status', 404) == 200:
-        if response.get('data', {}).get('backup_requested', False):
-            do_backup = True
+    try:
+        response = response.json()
+        if response.get('status', 404) == 200:
+            if response.get('data', {}).get('backup_requested', False):
+                do_backup = True
+    except Exception as error:
+        print(error)
+        
     if not do_backup:
         print('No backup requested')
     else:
@@ -42,7 +46,6 @@ if __name__ == '__main__':
         backup_file.close()
         print('Backup file created')
 
-       
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
         restore_file = restore_file.replace('.zip', 't_restore')
