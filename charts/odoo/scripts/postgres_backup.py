@@ -51,10 +51,9 @@ if __name__ == '__main__':
         backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
         backup_file.close()
         print('Backup file created')
-    print(json.dumps(response,indent=4))
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
-        restore_file = restore_file.replace('.zip', 'to_restore')
+        restore_file = restore_file.replace('.zip', '.to_restore')
         if restore_file:
             restore = open('/restore/' + restore_file, 'w')
             restore.write('Waiting')

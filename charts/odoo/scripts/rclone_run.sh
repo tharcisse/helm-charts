@@ -5,7 +5,7 @@ while :
 do     
     echo "BUCKET $BUCKET_NAME PROVIDER $STNAME"
     if [[ "$BUCKET_NAME" != "undefined" && "$STNAME" != "undefined" ]]; then
-        for f in $(find /backup/* -type f -mmin +2);
+        for f in $(find /backup/* -type f -mmin +1);
         do
             filename=${f#"/backup/"}
             rclone sync -P $f ${STNAME}:${BUCKET_NAME}/${ODOO_DB}
@@ -16,7 +16,7 @@ do
         for f in $(find /restore/*.to_restore);
         do
             filetorestore=${f#"/restore/"}
-            filename=${filetorestore%"to_restore"}
+            filename=${filetorestore%".to_restore"}
             rclone sync -P ${STNAME}:${BUCKET_NAME}/${ODOO_DB}/${filename}.zip /restore/temp
             mv /restore/temp/* /restore/
             rm -f $f
