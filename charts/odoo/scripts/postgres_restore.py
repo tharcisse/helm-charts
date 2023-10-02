@@ -3,6 +3,7 @@
 from xmlrpc.client import ServerProxy as XMLServerProxy
 import base64
 import argparse
+import requests
 from datetime import datetime
 import requests
 import json
@@ -36,5 +37,10 @@ if __name__ == '__main__':
                 os.remove(file_full_name)
             except OSError:
                 pass
-            notify = True
+            
+            payload={
+             "namespace": args.db_name, "restore_name": filename,"code": args.pod_code
+            }
+            requests.post(args.saas_manager + '/restore_notifier', json=payload,
+                            headers={'content-Type': 'application/json'}, timeout=60)
    

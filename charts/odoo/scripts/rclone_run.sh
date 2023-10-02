@@ -8,7 +8,7 @@ do
         for f in $(find /backup/* -type f -mmin +1);
         do
             filename=${f#"/backup/"}
-            rclone sync -P $f ${STNAME}:${BUCKET_NAME}/${ODOO_DB}
+            rclone sync -P $f ${STNAME}:${BUCKET_NAME}/${SAAS_SUBSCRIPTION_NUM}
             rm -f $f
             echo "Sent to Object Storage"  
             curl -X POST -H "Content-Type: application/json" -d "{\"namespace\": \"${ODOO_DB}\",\"backup_name\": \"${filename}\",\"code\": \"${POD_CODE}\"}" ${SAAS_MANAGER_URL}/backup_notifier
@@ -17,11 +17,10 @@ do
         do
             filetorestore=${f#"/restore/"}
             filename=${filetorestore%".to_restore"}
-            rclone sync -P ${STNAME}:${BUCKET_NAME}/${ODOO_DB}/${filename}.zip /restore/temp
+            rclone sync -P ${STNAME}:${BUCKET_NAME}/${SAAS_SUBSCRIPTION_NUM}/${filename}.zip /restore/temp
             mv /restore/temp/* /restore/
             rm -f $f
             echo "restored to Object Storage"       
-            curl -X POST -H "Content-Type: application/json" -d "{\"namespace\": \"${ODOO_DB}\", \"restore_name\": \"${filename}\",\"code\": \"${POD_CODE}\"}" ${SAAS_MANAGER_URL}/restore_notifier
         done
         sleep 20
     fi
