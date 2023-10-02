@@ -24,8 +24,9 @@ if __name__ == '__main__':
     sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
     restore_name = ''
     for filename in os.listdir(directory):
+        print('Start restoring')
         if '.zip' in filename:
-            print(f"Resore file found {filename}" )
+            print(f"Restore file found {filename}" )
             restore_name = filename
             file_full_name = os.path.join(directory, filename)
             restore_file = open(file_full_name, 'rb')

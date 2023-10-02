@@ -15,7 +15,7 @@ do
         done
         for f in $(find /restore/*.to_restore);
         do
-            filetorestore=${f#"/backup/"}
+            filetorestore=${f#"/restore/"}
             filename=${filetorestore%"to_restore"}
             rclone sync -P ${STNAME}:${BUCKET_NAME}/${ODOO_DB}/${filename}.zip /restore/temp
             mv /restore/temp/* /restore/

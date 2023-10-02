@@ -4,6 +4,7 @@ import base64
 import argparse
 from datetime import datetime
 import requests
+import sys
 import json
 
 if __name__ == '__main__':
@@ -21,8 +22,13 @@ if __name__ == '__main__':
         'namespace': args.db_name,
         'code': args.pod_code
     }
-    response = requests.get(args.saas_manager + '/backup_checker', json=payload,
+    try:
+        response = requests.get(args.saas_manager + '/backup_checker', json=payload,
                             headers={'content-Type': 'application/json'}, timeout=60)
+    except Exception as error:
+        print(error)
+        sys.exit(1)
+    
     do_backup = False
     try:
         response = response.json()
@@ -48,8 +54,9 @@ if __name__ == '__main__':
 
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
-        restore_file = restore_file.replace('.zip', 't_restore')
+        restore_file = restore_file.replace('.zip', 'to_restore')
         if restore_file:
             restore = open('/restore/' + restore_file, 'w')
             restore.write('Waiting')
             restore.close()
+            print('Pending a restore')
