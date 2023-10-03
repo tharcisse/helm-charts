@@ -33,7 +33,7 @@ if __name__ == '__main__':
             restore_file = open(file_full_name, 'rb')
             restored=False
             try:
-                sock.drop(args.password,args.db_name)
+                sock.drop(args.master_password,args.db_name)
             except Exception as error:
                 print(error)
 
