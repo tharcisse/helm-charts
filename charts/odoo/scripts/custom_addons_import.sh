@@ -22,7 +22,7 @@ rm -r zipcustom
 rm -f ${SAAS_DEPLOYMENT_HASH}.zip
 cd custom
 
-if [[ "$CUSTOM_GIT" == "undefined" || "$CUSTOM_GIT_BRANCH" == "undefined" ]]; then
+if [[ "$CUSTOM_GIT" == "undefined" || "$CUSTOM_GIT_BRANCH" == "undefined" || -z "$CUSTOM_GIT" || -z  "$CUSTOM_GIT_BRANCH" ]]; then
   echo "No repo defined"
 elif [[ "$CUSTOM_GIT_TOKEN" != "undefined" ]]; then
     curl -sSL -u ${CUSTOM_GIT_TOKEN}:x-oauth-basic ${CUSTOM_GIT%"$suffix"}/tarball/${CUSTOM_GIT_BRANCH%"$branchsuffix"} | tar zxf - --strip-components=1
