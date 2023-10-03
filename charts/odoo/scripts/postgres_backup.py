@@ -5,6 +5,7 @@ import argparse
 from datetime import datetime
 import requests
 import sys
+import os
 import json
 
 if __name__ == '__main__':
@@ -24,11 +25,11 @@ if __name__ == '__main__':
     }
     try:
         response = requests.get(args.saas_manager + '/backup_checker', json=payload,
-                            headers={'content-Type': 'application/json'}, timeout=60)
+                                headers={'content-Type': 'application/json'}, timeout=60)
     except Exception as error:
         print(error)
         sys.exit(1)
-    
+
     do_backup = False
     try:
         response = response.json()
@@ -37,7 +38,11 @@ if __name__ == '__main__':
                 do_backup = True
     except Exception as error:
         print(error)
-        
+
+    files_to_bkp = [x for x in os.listdir("/restore") if len(x) >= 7 and x[7:] == ".to_bkp"]
+    if files_to_bkp:
+        do_backup = True
+
     if not do_backup:
         print('No backup requested')
     else:
@@ -51,6 +56,12 @@ if __name__ == '__main__':
         backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
         backup_file.close()
         print('Backup file created')
+
+        for rfile in files_to_bkp:
+            try:
+                os.remove(os.path.join('/restore',rfile))
+            except OSError:
+                pass
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
         restore_file = restore_file.replace('.zip', '.to_restore')
@@ -59,3 +70,6 @@ if __name__ == '__main__':
             restore.write('Waiting')
             restore.close()
             print('Pending a restore')
+            t_backup = open('/restore/' + restore_file.replace('.to_restore', '.to_bkp'), 'w')
+            t_backup.write('OK')
+            t_backup.close()

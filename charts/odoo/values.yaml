@@ -2,6 +2,7 @@
 #namespace: NAMESPACE
 env: "prod"
 branch: "prod"
+revision: ""
 postgres:
   password: PG_RANDOM_PASSWORD
   imageversion: postgres:15

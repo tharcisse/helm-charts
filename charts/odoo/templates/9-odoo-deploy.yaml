@@ -15,6 +15,7 @@ spec:
       labels:
         app: odoo
         hash: {{.Values.odoo.deploymenthash}}
+        revision: {{.Values.revision}}
     spec:
       volumes:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}

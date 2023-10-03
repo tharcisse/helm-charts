@@ -31,16 +31,29 @@ if __name__ == '__main__':
             restore_name = filename
             file_full_name = os.path.join(directory, filename)
             restore_file = open(file_full_name, 'rb')
-            sock.restore(args.master_password, args.db_name, base64.b64encode(restore_file.read()).decode())
+            restored=False
+            try:
+                sock.drop(args.password,args.db_name)
+            except Exception as error:
+                print(error)
+
+            try:
+                sock.restore(args.master_password, args.db_name, base64.b64encode(restore_file.read()).decode())
+                restored=True
+            except Exception as error:
+                print(error)
+
             restore_file.close()
             try:
-                os.remove(file_full_name)
+                if restored:
+                    os.remove(file_full_name)
             except OSError:
                 pass
             
-            payload={
-             "namespace": args.db_name, "restore_name": filename,"code": args.pod_code
-            }
-            requests.post(args.saas_manager + '/restore_notifier', json=payload,
-                            headers={'content-Type': 'application/json'}, timeout=60)
+            if restored:
+                payload={
+                "namespace": args.db_name, "restore_name": filename,"code": args.pod_code
+                }
+                requests.post(args.saas_manager + '/restore_notifier', json=payload,
+                                headers={'content-Type': 'application/json'}, timeout=60)
    
