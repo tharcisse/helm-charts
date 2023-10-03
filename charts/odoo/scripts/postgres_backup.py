@@ -39,9 +39,7 @@ if __name__ == '__main__':
     except Exception as error:
         print(error)
 
-    files_to_bkp = [x for x in os.listdir("/restore") if len(x) >= 7 and x[7:] == ".to_bkp"]
-    if files_to_bkp:
-        do_backup = True
+
 
     if not do_backup:
         print('No backup requested')
@@ -57,11 +55,7 @@ if __name__ == '__main__':
         backup_file.close()
         print('Backup file created')
 
-        for rfile in files_to_bkp:
-            try:
-                os.remove(os.path.join('/restore',rfile))
-            except OSError:
-                pass
+        
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
         restore_file = restore_file.replace('.zip', '.to_restore')
@@ -70,6 +64,4 @@ if __name__ == '__main__':
             restore.write('Waiting')
             restore.close()
             print('Pending a restore')
-            t_backup = open('/restore/' + restore_file.replace('.to_restore', '.to_bkp'), 'w')
-            t_backup.write('OK')
-            t_backup.close()
+            
