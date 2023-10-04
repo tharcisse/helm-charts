@@ -22,7 +22,7 @@ def odoo_backup(args):
     backup_file.close()
     print('Backup file created')
     print('Loading to S3')
-    rclone.copy(backup_full_name, args.subscription + '/' + backup_name, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
+    rclone.copy(backup_full_name, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
     file_hash=rclone.hash(HashTypes.sha1, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
     print (file_hash)
     print('Finished loadng to S3')
