@@ -236,11 +236,11 @@ def create_db(db_host, database, db_port, user_name, user_password):
     con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = con.cursor()
     try:
-        cur.execute("DROP DATABASE {} ;".format(database))
+        cur.execute('DROP DATABASE "{}" ;'.format(database))
     except Exception as e:
         print('DB does not exist, nothing to drop')
-    cur.execute("CREATE DATABASE {} ;".format(database))
-    cur.execute("GRANT ALL PRIVILEGES ON DATABASE {} TO {} ;".format(database, user_name))
+    cur.execute('CREATE DATABASE "{}" ;'.format(database))
+    cur.execute('GRANT ALL PRIVILEGES ON DATABASE "{}" TO "{}" ;'.format(database, user_name))
     return database
 
 
@@ -255,7 +255,7 @@ def swap_restore_active(db_host, restore_database, active_database, db_port, use
                     "FROM pg_stat_activity "
                     "WHERE pid <> pg_backend_pid( ) "
                     "AND datname = '{}'".format(active_database))
-        cur.execute("DROP DATABASE {}".format(active_database))
+        cur.execute('DROP DATABASE "{}"'.format(active_database))
         cur.execute('ALTER DATABASE "{}" RENAME TO "{}";'.format(restore_database, active_database))
     except Exception as e:
         print(e)
