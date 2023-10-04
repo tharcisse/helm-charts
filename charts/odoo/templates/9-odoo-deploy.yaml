@@ -48,10 +48,10 @@ spec:
       initContainers:
       - name: filestore-data-permission-fix
         image: busybox
-        command: ["/bin/chmod","-R","777", "/datadir"]
+        command: ["/bin/chmod","-R","777", "/var/lib/odoo"]
         volumeMounts:
         - name: datadir
-          mountPath: /datadir
+          mountPath: /var/lib/odoo
       containers:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
       - name: odoo-backup
@@ -88,7 +88,7 @@ spec:
         - name: odoo-data
           mountPath: /mnt/data
         - name: datadir
-          mountPath: /mnt/datadir
+          mountPath: /var/lib/odoo
         ports:
         - containerPort: 8069
         command: ["bash", "/mnt/scripts/run.sh"]
