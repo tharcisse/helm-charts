@@ -93,23 +93,26 @@ if __name__ == '__main__':
         odoo_backup(args)
 
     if response.get('data', {}).get('restore_requested', False):
-        restore_file = response.get('data', {}).get('restore_name', '')
+        restore_file_name = response.get('data', {}).get('restore_name', '')
         restored = False
         print('Dowload restore from S3')
         try:
-            rclone.copy(args.store_name + ":" + args.bucket_name + "/" + args.subscription + '/' + restore_file, '/restore')
+            rclone.copy(args.store_name + ":" + args.bucket_name + "/" + args.subscription + '/' + restore_file_name, '/restore')
         except Exception as error:
             print(error)
-        file_full_name = os.path.join('/restore', restore_file)
+        file_full_name = os.path.join('/restore', restore_file_name)
         restore_file = open(file_full_name, 'rb')
 
         odoo_backup(args)
         try:
             sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
             sock.restore(args.master_password, args.db_name+'_restore', base64.b64encode(restore_file.read()).decode())
+            
         except Exception as error:
             print(error)
+        restore_file.close()
         print('Restore Loaded')
+
         try:
             swap_restore_active(args.db_host, args.db_name+'_restore', args.db_name,
                                 args.db_port, args.db_user, args.db_password)
@@ -126,10 +129,11 @@ if __name__ == '__main__':
 
         payload = {
             "namespace": args.db_name,
-            "restore_name": restore_file,
+            "restore_name": restore_file_name,
             "code": args.pod_code,
             "restore_status": restored,
             "reason": reason
         }
+        print(payload)
         requests.post(args.saas_manager + '/restore_notifier', json=payload,
                       headers={'content-Type': 'application/json'}, timeout=60)
