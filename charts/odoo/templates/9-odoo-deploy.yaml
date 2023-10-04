@@ -90,9 +90,9 @@ spec:
               name: odoo-config
         env:
         - name: HOST
-          value: postgres-service.{{.Values.namespace}}.svc
+          value: "postgres-service.{{.Values.namespace}}.svc"
         - name: USER
           value: odoo
         - name: PASSWORD
-          value: {{.Values.postgres.password}}
+          value: {{.Values.postgres.password | quote}}
         

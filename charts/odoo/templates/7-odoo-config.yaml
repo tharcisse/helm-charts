@@ -25,6 +25,6 @@ data:
   POD_CODE: {{.Values.odoo.podcode | quote }}
   ODOO_DB: {{.Values.namespace}}
   DBPASSWORD: {{.Values.postgres.password}}
-  DBHOST: postgres-service.{{.Values.namespace}}.svc
+  DBHOST: "postgres-service.{{.Values.namespace}}.svc"
   DBUSER: odoo
-  DBPORT: 5432
+  DBPORT: "5432"
