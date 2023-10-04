@@ -1,6 +1,6 @@
 #!/bin/bash
 set -exo pipefail
-
+    echo "DATABASE ${ODOO_DB}"
     BACKUP_ARGS=()
     BACKUP_ARGS+=("--db_name")
     BACKUP_ARGS+=("${ODOO_DB}")
@@ -26,30 +26,25 @@ set -exo pipefail
     BACKUP_ARGS+=("--subscription")
     BACKUP_ARGS+=("${SAAS_SUBSCRIPTION_NUM}")
     
+    BACKUP_ARGS+=("--db_host")
+    BACKUP_ARGS+=("${DBHOST}")
+    
+    BACKUP_ARGS+=("--db_port")
+    BACKUP_ARGS+=("${DBPORT}")
 
-
+    BACKUP_ARGS+=("--db_user")
+    BACKUP_ARGS+=("${DBUSER}")
     
 
-    RESTORE_ARGS+=$BACKUP_ARGS
-    RESTORE_ARGS+=("--db_host")
-    RESTORE_ARGS+=("${DBHOST}")
-    
-    RESTORE_ARGS+=("--db_port")
-    RESTORE_ARGS+=("${DBPORT}")
+    BACKUP_ARGS+=("--db_password")
+    BACKUP_ARGS+=("${DBPASSWORD}")
 
-    RESTORE_ARGS+=("--db_user")
-    RESTORE_ARGS+=("${DBUSER}")
-    
-
-    RESTORE_ARGS+=("--db_password")
-    RESTORE_ARGS+=("${DBPASSWORD}")
-
-    echo "RESTORE ARGUMENTS: $@ ${RESTORE_ARGS[@]}"
+    echo "RESTORE ARGUMENTS: $@ ${BACKUP_ARGS[@]}"
 cd /mnt/scripts
 while : 
 do
     #/mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
-    #/mnt/scripts/postgres_restore.py ${RESTORE_ARGS[@]}  
-    /mnt/scripts/postgres_backup.py ${RESTORE_ARGS[@]}  
+    #/mnt/scripts/postgres_restore.py ${BACKUP_ARGS[@]}  
+    /mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  
     sleep 30
 done;

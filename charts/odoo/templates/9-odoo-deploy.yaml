@@ -45,6 +45,13 @@ spec:
       - name: datadir
         persistentVolumeClaim:
           claimName: postgresql-pvc
+      initContainers:
+      - name: filestore-data-permission-fix
+        image: busybox
+        command: ["/bin/chmod","-R","777", "/datadir"]
+        volumeMounts:
+        - name: datadir
+          mountPath: /datadir
       containers:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
       - name: odoo-backup
@@ -80,8 +87,8 @@ spec:
           mountPath: /mnt/scripts
         - name: odoo-data
           mountPath: /mnt/data
-        - mountPath: /mnt/datadir
-          name: datadir
+        - name: datadir
+          mountPath: /mnt/datadir
         ports:
         - containerPort: 8069
         command: ["bash", "/mnt/scripts/run.sh"]
