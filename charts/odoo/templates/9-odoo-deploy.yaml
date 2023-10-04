@@ -23,7 +23,6 @@ spec:
         secret:
           optional: false
           secretName: rclone-config
-        name: rclone-scripts
       - name: backup-scripts
         configMap:
           name: backup-scripts
