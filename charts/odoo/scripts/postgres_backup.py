@@ -13,25 +13,35 @@ from postgres_manager import swap_restore_active
 
 
 def odoo_backup(args):
-    date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
-    backup_name = args.db_name + '_' + date_str + '.zip'
-    backup_full_name = args.dest + '/' + backup_name
-    sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
-    backup_file = open(backup_full_name, 'wb')
-    backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
-    backup_file.close()
-    print('Backup file created')
-    print('Loading to S3')
-    rclone.copy(backup_full_name, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
-    file_hash=rclone.hash(HashTypes.sha1, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
-    print (file_hash)
-    print('Finished loadng to S3')
+    backedup=False
+    reason=""
+    try:
+        date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
+        backup_name = args.db_name + '_' + date_str + '.zip'
+        backup_full_name = args.dest + '/' + backup_name
+        sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
+        backup_file = open(backup_full_name, 'wb')
+        backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
+        backup_file.close()
+        print('Backup file created')
+        print('Loading to S3')
+        rclone.copy(backup_full_name, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
+        print('Finished loadng to S3')
+        backedup=True
+    except Exception as error:
+        print(error)
+        reason=str(error)
+
     try:
         os.remove(backup_full_name)
     except OSError:
         pass
     payload={
-            "namespace": args.db_name, "backup_name": backup_name,"code": args.pod_code
+            "namespace": args.db_name, 
+            "backup_name": backup_name,
+            "code": args.pod_code,
+            "op_status":backedup,
+            "reason":reason
             }
     requests.post(args.saas_manager + '/backup_notifier', json=payload,
                     headers={'content-Type': 'application/json'}, timeout=60)
