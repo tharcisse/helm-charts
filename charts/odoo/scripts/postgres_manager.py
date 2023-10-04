@@ -254,7 +254,7 @@ def swap_restore_active(db_host, restore_database, active_database, db_port, use
         cur.execute("SELECT pg_terminate_backend( pid ) "
                     "FROM pg_stat_activity "
                     "WHERE pid <> pg_backend_pid( ) "
-                    "AND datname = '{}'".format(active_database))
+                    "AND datname = '{}' OR datname = '{}'".format(active_database,restore_database))
         cur.execute('DROP DATABASE "{}"'.format(active_database))
         cur.execute('ALTER DATABASE "{}" RENAME TO "{}";'.format(restore_database, active_database))
     except Exception as e:
