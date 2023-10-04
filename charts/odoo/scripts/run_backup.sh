@@ -30,22 +30,22 @@ set -exo pipefail
 
     
 
-    RESTORE_ARGS=$BACKUP_ARGS
-    RESTORE_ARGS=("--db_host")
-    RESTORE_ARGS=("${DBHOST}")
+    RESTORE_ARGS+=$BACKUP_ARGS
+    RESTORE_ARGS+=("--db_host")
+    RESTORE_ARGS+=("${DBHOST}")
     
-    RESTORE_ARGS=("--db_port")
-    RESTORE_ARGS=("${DBPORT}")
+    RESTORE_ARGS+=("--db_port")
+    RESTORE_ARGS+=("${DBPORT}")
 
-    RESTORE_ARGS=("--db_user")
-    RESTORE_ARGS=("${DBUSER}")
+    RESTORE_ARGS+=("--db_user")
+    RESTORE_ARGS+=("${DBUSER}")
     
 
-    RESTORE_ARGS=("--db_password")
-    RESTORE_ARGS=("${DBPASSWORD}")
+    RESTORE_ARGS+=("--db_password")
+    RESTORE_ARGS+=("${DBPASSWORD}")
 
     echo "RESTORE ARGUMENTS: $@ ${RESTORE_ARGS[@]}"
-    
+cd /mnt/scripts
 while : 
 do
     #/mnt/scripts/postgres_backup.py ${BACKUP_ARGS[@]}  

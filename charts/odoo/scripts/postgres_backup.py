@@ -9,7 +9,7 @@ import os
 import json
 from rclone_python import rclone, remote_types
 from rclone_python.hash_types import HashTypes
-from .postgres_manager import swap_restore_active
+from postgres_manager import swap_restore_active
 
 
 def odoo_backup(args):
