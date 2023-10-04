@@ -7,6 +7,34 @@ import requests
 import sys
 import os
 import json
+from rclone_python import rclone, remote_types
+from rclone_python.hash_types import HashTypes
+from .postgres_manager import swap_restore_active
+
+
+def odoo_backup(args):
+    date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
+    backup_name = args.db_name + '_' + date_str + '.zip'
+    backup_full_name = args.dest + '/' + backup_name
+    sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
+    backup_file = open(backup_full_name, 'wb')
+    backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
+    backup_file.close()
+    print('Backup file created')
+    print('Loading to S3')
+    rclone.copy(backup_full_name, args.subscription + '/' + backup_name, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
+    file_hash=rclone.hash(HashTypes.sha1, args.store_name + ":" + args.bucket_name +"/" + args.subscription)
+    print (file_hash)
+    print('Finished loadng to S3')
+    try:
+        os.remove(backup_full_name)
+    except OSError:
+        pass
+    payload={
+            "namespace": args.db_name, "backup_name": backup_name,"code": args.pod_code
+            }
+    requests.post(args.saas_manager + '/backup_notifier', json=payload,
+                    headers={'content-Type': 'application/json'}, timeout=60)
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
@@ -15,6 +43,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--dest', required=True)
     arg_parser.add_argument('--saas_manager', required=True)
     arg_parser.add_argument('--pod_code', required=True)
+    arg_parser.add_argument('--store_name', required=True)
+    arg_parser.add_argument('--bucket_name', required=True)
+    arg_parser.add_argument('--subscription', required=True)
+
+
+    arg_parser.add_argument('--db_host', required=True)
+    arg_parser.add_argument('--db_port', required=True)
+    arg_parser.add_argument('--db_user', required=True)
+    arg_parser.add_argument('--db_password', required=True)
     #arg_parser.add_argument('--notify', required=True)
     notify = False
 
@@ -45,23 +82,41 @@ if __name__ == '__main__':
         print('No backup requested')
     else:
         print('Backup started')
-        notify = True
-        date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
-        backup_name = args.db_name + '_' + date_str + '.zip'
-        backup_full_name = args.dest + '/' + backup_name
-        sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
-        backup_file = open(backup_full_name, 'wb')
-        backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
-        backup_file.close()
-        print('Backup file created')
-
+        odoo_backup(args)
         
     if response.get('data', {}).get('restore_requested', False):
         restore_file = response.get('data', {}).get('restore_name', '')
-        restore_file = restore_file.replace('.zip', '.to_restore')
-        if restore_file:
-            restore = open('/restore/' + restore_file, 'w')
-            restore.write('Waiting')
-            restore.close()
-            print('Pending a restore')
+        restored=False
+        print('Dowload restore from S3')
+        rclone.copy(args.store_name + ":" + args.bucket_name +"/" + args.subscription +'/' + restore_file,'/restore')
+        file_full_name = os.path.join('/restore', restore_file)
+        restore_file = open(file_full_name, 'rb')
+
+        odoo_backup(args)
+
+        sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
+        sock.restore(args.master_password, args.db_name+'_restore', base64.b64encode(restore_file.read()).decode())
+        print('Restore Loaded')
+        swap_restore_active(args.db_host, args.db_name+'_restore', args.db_name, args.db_port, args.db_user, args.db_password)
+        print('Restore swapped')
+        restored=True
+        try:
+            os.remove(file_full_name)
+        except OSError:
+            pass
+        reason=""
+        
+        payload={
+        "namespace": args.db_name, 
+        "restore_name": restore_file,
+        "code": args.pod_code,
+        "restore_status":restored,
+        "reason":reason
+        }
+        requests.post(args.saas_manager + '/restore_notifier', json=payload,
+                        headers={'content-Type': 'application/json'}, timeout=60)
+
+        
+
+
             

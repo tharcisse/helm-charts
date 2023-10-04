@@ -10,6 +10,8 @@ data:
 {{ (.Files.Glob "scripts/run_backup.sh").AsConfig | indent 2 }}
 {{ (.Files.Glob "scripts/postgres_backup.py").AsConfig | indent 2 }}
 {{ (.Files.Glob "scripts/postgres_restore.py").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/postgres_manager.py").AsConfig | indent 2 }}
+{{ (.Files.Glob "scripts/__init__.py").AsConfig | indent 2 }}
 {{- end }}
 
 

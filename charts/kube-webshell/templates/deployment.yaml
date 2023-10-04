@@ -34,10 +34,17 @@ spec:
           - name: {{ template "kube-webshell.fullname" . }}-conf
             mountPath: "/opt/kube/conf"
             readOnly: true
+          - name: {{ template "kube-webshell.fullname" . }}-kubeconf
+            mountPath: "/opt/kube/kubeconf"
+            readOnly: true
       volumes:
       - name: {{ template "kube-webshell.fullname" . }}-conf
         secret:
           secretName: {{ template "kube-webshell.fullname" . }}-secret
+      - name: {{ template "kube-webshell.fullname" . }}-kubeconf
+        hostPath:
+          path: /root/.kube
+          type: Directory
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

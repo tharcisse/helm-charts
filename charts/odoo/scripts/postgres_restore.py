@@ -8,6 +8,8 @@ from datetime import datetime
 import requests
 import json
 import os
+import shutil
+from .postgres_manager import restore_postgres_db
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
@@ -16,6 +18,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--dest', required=True)
     arg_parser.add_argument('--saas_manager', required=True)
     arg_parser.add_argument('--pod_code', required=True)
+
+    arg_parser.add_argument('--store_name', required=True)
+    arg_parser.add_argument('--bucket_name', required=True)
+    arg_parser.add_argument('--subscription', required=True)
+    
+    arg_parser.add_argument('--db_host', required=True)
+    arg_parser.add_argument('--db_port', required=True)
+    arg_parser.add_argument('--db_user', required=True)
+    arg_parser.add_argument('--db_password', required=True)
     #arg_parser.add_argument('--notify', required=True)
     notify = False
 
@@ -27,10 +38,6 @@ if __name__ == '__main__':
     for filename in os.listdir(directory):
         if '.zip' in filename:
             print(f"Restore file found {filename}" )
-            restore_name = filename
-            file_full_name = os.path.join(directory, filename)
-            restore_file = open(file_full_name, 'rb')
-            restored=False
             try:
                 print('Backup started')
                 date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
@@ -45,16 +52,20 @@ if __name__ == '__main__':
             except Exception as error:
                 print('Error dropping DB')
                 print(error)
-
+            restore_name = filename
+            file_full_name = os.path.join(directory, filename)
+            restored=False
             try:
-                print('Start restoring')
-                sock.restore(args.master_password, args.db_name, base64.b64encode(restore_file.read()).decode())
-                restored=True
+                inner_directory= filename.rstrip('.zip')
+                shutil.unpack_archive(file_full_name,'/dbrestore/' + inner_directory)
+                shutil.copytree('/dbrestore/' + inner_directory + 'filestore', '/datadir', dirs_exist_ok=True)
+                restore_postgres_db(args.db_host, args.db_name, args.db_port, args.db_user, args.db_password, '/dbrestore/' + inner_directory + 'dump.sql', True)
+
             except Exception as error:
                 print('Error restoring DB')
                 print(error)
 
-            restore_file.close()
+            
             try:
                 if restored:
                     os.remove(file_full_name)

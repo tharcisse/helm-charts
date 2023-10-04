@@ -23,9 +23,6 @@ spec:
         secret:
           optional: false
           secretName: rclone-config
-      - configMap:
-          defaultMode: 484
-          name: rclone-script-cm
         name: rclone-scripts
       - name: backup-scripts
         configMap:
@@ -46,21 +43,26 @@ spec:
         configMap:
           name: addons-scripts
           defaultMode: 0777
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: postgresql-pvc
       containers:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
-      - name: rclone-backup
-        image: rclone/rclone:latest
-        command: ["/bin/sh", "-c", "/scripts/rclone_run.sh"]
+      - name: odoo-backup
+        image: tarcisse/saaspgtools:1.0
+        command: ["bash", "/mnt/scripts/run_backup.sh"]
+        
         volumeMounts:
-          - mountPath: /config/rclone
-            name: rclone-config
-          - mountPath: /scripts
-            name: rclone-scripts
-            readOnly: true
-          - mountPath: /backup
-            name: backup-data
-          - mountPath: /restore
-            name: restore-data
+        - mountPath: /config/rclone
+          name: rclone-config
+        - name: backup-data
+          mountPath: /backup
+        - mountPath: /restore
+          name: restore-data
+        - name: backup-scripts
+          mountPath: /mnt/scripts
+        - mountPath: /datadir
+          name: datadir
         envFrom:
         - configMapRef:
             name: odoo-config
@@ -71,20 +73,6 @@ spec:
           value: {{.Values.s3object.provider | quote }}
         - name: STNAME
           value: {{.Values.s3object.name | quote}}
-      - name: odoo-backup
-        image: python:3.9.18-slim-bullseye
-        command: ["bash", "/mnt/scripts/run_backup.sh"]
-        
-        volumeMounts:
-        - name: backup-data
-          mountPath: /backup
-        - mountPath: /restore
-          name: restore-data
-        - name: backup-scripts
-          mountPath: /mnt/scripts
-        envFrom:
-        - configMapRef:
-            name: odoo-config
       {{- end}}
       - name: odoo
         image: {{.Values.odoo.imageversion}}
@@ -93,10 +81,11 @@ spec:
           mountPath: /mnt/scripts
         - name: odoo-data
           mountPath: /mnt/data
+        - mountPath: /mnt/datadir
+          name: datadir
         ports:
         - containerPort: 8069
         command: ["bash", "/mnt/scripts/run.sh"]
-        #args: ["/mnt/scripts/global_addons_import.sh;/mnt/scripts/custom_addons_import.sh;/mnt/scripts/requirements.sh"]
         envFrom:
           - configMapRef:
               name: odoo-config
