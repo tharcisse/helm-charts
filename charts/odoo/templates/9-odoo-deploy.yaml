@@ -55,7 +55,7 @@ spec:
       containers:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
       - name: odoo-backup
-        image: tarcisse/saaspgtools:1.0
+        image: tarcisse/saassidetools:1.0
         command: ["bash", "/mnt/scripts/run_backup.sh"]
         
         volumeMounts:
