@@ -67,7 +67,7 @@ if [[ -n "$ODOO_DB" ]]; then
 fi
 
 ADD_ARGS+=("--data-dir")
-ADD_ARGS+=("/mnt/datadir")
+ADD_ARGS+=("/var/lib/odoo")
 
 printf "admin_passwd = ${MASTERDB_PASSWORD}\n" >> "$ODOO_RC"
 
