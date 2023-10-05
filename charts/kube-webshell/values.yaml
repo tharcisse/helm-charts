@@ -55,6 +55,6 @@ affinity: {}
 appconfig: |-
     appname = kube-webshell
     httpport = 8080
-    kubeconfig = /opt/kube/conf/config
+    kubeconfig = /opt/kube/kubeconf/config
 
 
