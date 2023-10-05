@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume # Create a PV
+metadata:
+  name: "filestore-pv-{{.Values.namespace}}"
+  labels:
+    type: local # Sets PV's type to local
+spec:
+  storageClassName: "filestore-{{.Values.namespace}}"
+  capacity:
+    storage: {{.Values.postgres.storage}} # Sets PV Volume
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: "/filestore/{{.Values.namespace}}" # Sets the volume's path

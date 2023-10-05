@@ -48,7 +48,7 @@ spec:
           defaultMode: 0777
       - name: datadir
         persistentVolumeClaim:
-          claimName: postgresql-pvc
+          claimName: filestore-pvc
       initContainers:
       - name: filestore-data-permission-fix
         image: busybox
