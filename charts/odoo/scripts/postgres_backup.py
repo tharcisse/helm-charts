@@ -10,6 +10,7 @@ import json
 from rclone_python import rclone, remote_types
 from rclone_python.hash_types import HashTypes
 from postgres_manager import swap_restore_active
+import shutil
 
 
 def odoo_backup(args):
@@ -116,9 +117,20 @@ if __name__ == '__main__':
         try:
             swap_restore_active(args.db_host, args.db_name+'_restore', args.db_name,
                                 args.db_port, args.db_user, args.db_password)
+            #swap filestores
+            curr_filestore='/datadir/' + args.db_name + 'filestore' + args.db_name
+            temp_filestore='/datadir/' + args.db_name + 'filestore' + args.db_name+'_restore'
             restored = True
         except Exception as error:
             print(error)
+        if restored:
+            try:
+                if os.path.exists(curr_filestore) and os.path.exists(temp_filestore):
+                    shutil.rmtree(curr_filestore)
+                    shutil.move(temp_filestore,curr_filestore)
+            except Exception as error:
+                print(error)
+                print('Could Not swa filestores')
         print('Restore swapped')
 
         try:
