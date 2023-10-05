@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pvchecker-scripts
+  namespace: {{.Values.namespace}}
+  labels:
+    app: odoo-backup
+data:
+{{ (.Files.Glob "scripts/pvchecker.sh").AsConfig | indent 2 }}

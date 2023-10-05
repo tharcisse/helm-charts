@@ -42,16 +42,22 @@ spec:
         configMap:
           name: addons-scripts
           defaultMode: 0777
+      - name: pvchecker-scripts
+        configMap:
+          name: pvchecker-scripts
+          defaultMode: 0777
       - name: datadir
         persistentVolumeClaim:
           claimName: postgresql-pvc
       initContainers:
       - name: filestore-data-permission-fix
         image: busybox
-        command: ["/bin/chmod","-R","777", "/var/lib/odoo"]
+        command: ["/bin/sh","-c","/scripts/pvchecker.sh"]
         volumeMounts:
         - name: datadir
           mountPath: /var/lib/odoo
+        - name: pvchecker-scripts
+          mountPath: /scripts
       containers:
       {{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
       - name: odoo-backup
