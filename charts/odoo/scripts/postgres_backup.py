@@ -123,8 +123,8 @@ if __name__ == '__main__':
 
         print("Swap Filestore")
             #swap filestores
-        curr_filestore='/datadir/' + '/filestor/' + args.db_name
-        temp_filestore='/datadir/' + '/filestore/' + args.db_name+'_restore'
+        curr_filestore='/datadir' + '/filestore/' + args.db_name
+        temp_filestore='/datadir' + '/filestore/' + args.db_name+'_restore'
         print("Current filestore:" + curr_filestore)
         
         if restored:
