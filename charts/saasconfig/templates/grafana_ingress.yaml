@@ -13,7 +13,7 @@ spec:
   ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
   rules:
-    - host: {{ .Values.grafapa.host }}
+    - host: {{ .Values.grafana.host }}
       http: 
         paths:
         - path: /
