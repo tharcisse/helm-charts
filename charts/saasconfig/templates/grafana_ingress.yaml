@@ -1,4 +1,4 @@
-{{- if (eq .Values.app "argo")}}
+{{- if (eq .Values.app "saasconfig")}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
