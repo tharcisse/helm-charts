@@ -122,17 +122,15 @@ if __name__ == '__main__':
             print(error)
 
         print("Swap Filestore")
-        try:
             #swap filestores
-            curr_filestore='/datadir/' + args.db_name + '/filestor/' + args.db_name
-            temp_filestore='/datadir/' + args.db_name + '/filestore/' + args.db_name+'_restore'
-        except Exception as error:
-            print('Failed to swap filestore')
-            print(error)
+        curr_filestore='/datadir/' + '/filestor/' + args.db_name
+        temp_filestore='/datadir/' + '/filestore/' + args.db_name+'_restore'
+        print("Current filestore:" + curr_filestore)
         
         if restored:
             try:
                 if os.path.exists(curr_filestore) and os.path.exists(temp_filestore):
+                    print('Found filestore path')
                     shutil.rmtree(curr_filestore)
                     #shutil.copy(temp_filestore,curr_filestore)
                     shutil.move(temp_filestore,curr_filestore)
