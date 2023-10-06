@@ -1,0 +1,30 @@
+{{- if (eq .Values.app "argo")}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitoring
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.prometheus.host }}
+      http: 
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: prometheus-k8s
+              port:
+                name: http
+  tls:
+    - hosts:
+      - {{.Values.prometheus.host}}
+      secretName: {{ .secretName }}
+{{- end}}

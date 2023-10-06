@@ -132,7 +132,6 @@ if __name__ == '__main__':
                 if os.path.exists(curr_filestore) and os.path.exists(temp_filestore):
                     print('Found filestore path')
                     shutil.rmtree(curr_filestore)
-                    #shutil.copy(temp_filestore,curr_filestore)
                     shutil.move(temp_filestore,curr_filestore)
             except Exception as error:
                 print(error)
