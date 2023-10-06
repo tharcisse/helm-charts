@@ -22,9 +22,9 @@ spec:
             service:
               name: prometheus-k8s
               port:
-                name: http
+                name: web
   tls:
     - hosts:
       - {{.Values.prometheus.host}}
-      secretName: {{ .secretName }}
+      secretName: prometheus.tls
 {{- end}}
