@@ -13,6 +13,25 @@ from postgres_manager import swap_restore_active
 import shutil
 
 
+def swap_filestore(db_from, db_to):
+    print("Swap Filestore")
+    # swap filestores
+    curr_filestore = '/datadir' + '/filestore/' + db_to
+    temp_filestore = '/datadir' + '/filestore/' + db_from
+    print("Current filestore:" + curr_filestore)
+
+    if restored:
+        try:
+            if os.path.exists(curr_filestore) and os.path.exists(temp_filestore):
+                print('Found filestore path')
+                shutil.rmtree(curr_filestore)
+                shutil.move(temp_filestore, curr_filestore)
+        except Exception as error:
+            print(error)
+            print('Could Not swap filestores')
+    print('Restore swapped')
+
+
 def odoo_backup(args):
     backedup = False
     reason = ""
@@ -108,7 +127,7 @@ if __name__ == '__main__':
         try:
             sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
             sock.restore(args.master_password, args.db_name+'_restore', base64.b64encode(restore_file.read()).decode())
-            
+
         except Exception as error:
             print(error)
         restore_file.close()
@@ -121,22 +140,8 @@ if __name__ == '__main__':
         except Exception as error:
             print(error)
 
-        print("Swap Filestore")
-            #swap filestores
-        curr_filestore='/datadir' + '/filestore/' + args.db_name
-        temp_filestore='/datadir' + '/filestore/' + args.db_name+'_restore'
-        print("Current filestore:" + curr_filestore)
-        
         if restored:
-            try:
-                if os.path.exists(curr_filestore) and os.path.exists(temp_filestore):
-                    print('Found filestore path')
-                    shutil.rmtree(curr_filestore)
-                    shutil.move(temp_filestore,curr_filestore)
-            except Exception as error:
-                print(error)
-                print('Could Not swa filestores')
-        print('Restore swapped')
+            swap_filestore(args.db_name+'_restore', args.db_name)
 
         try:
             os.remove(file_full_name)
@@ -154,3 +159,25 @@ if __name__ == '__main__':
         print(payload)
         requests.post(args.saas_manager + '/restore_notifier', json=payload,
                       headers={'content-Type': 'application/json'}, timeout=60)
+    if response.get('data', {}).get('import_requested', False):
+        import_db_name = response.get('data', {}).get('import_name', '')
+
+        try:
+            swap_restore_active(args.db_host, import_db_name, args.db_name,
+                                args.db_port, args.db_user, args.db_password)
+            imported = True
+        except Exception as error:
+            print(error)
+            reason = str(error)
+        if imported:
+            swap_filestore(import_db_name, args.db_name)
+            payload = {
+                "namespace": args.db_name,
+                "import_name": import_db_name,
+                "code": args.pod_code,
+                "status": imported,
+                "reason": reason
+            }
+            print(payload)
+            requests.post(args.saas_manager + '/import_notifier', json=payload,
+                          headers={'content-Type': 'application/json'}, timeout=60)
