@@ -1,5 +1,6 @@
 
 #namespace: NAMESPACE
+letsencrypted: false
 env: "prod"
 branch: "prod"
 revision: ""

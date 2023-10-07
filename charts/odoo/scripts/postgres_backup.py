@@ -105,6 +105,7 @@ if __name__ == '__main__':
                 do_backup = True
     except Exception as error:
         print(error)
+        sys.exit(1)
 
     if not do_backup:
         print('No backup requested')
