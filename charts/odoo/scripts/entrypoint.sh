@@ -70,6 +70,7 @@ ADD_ARGS+=("--data-dir")
 ADD_ARGS+=("/var/lib/odoo")
 
 printf "admin_passwd = ${MASTERDB_PASSWORD}\n" >> "$ODOO_RC"
+printf "proxy_mode = True" >> "$ODOO_RC"
 
 
 ODOO_ARGS=("${DB_ARGS[@]}" "${ADD_ARGS[@]}")
