@@ -11,7 +11,8 @@ postgres:
   cpulimit: 3
   memoryrequest: 1Gi
   memorylimit: 4G
-
+tlscert: ""
+tlskey: ""
 s3object:
   bucketname: ""
   name: ""
