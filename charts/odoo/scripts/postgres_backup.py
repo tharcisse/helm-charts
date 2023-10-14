@@ -49,6 +49,7 @@ def odoo_backup(args):
         backup_full_name = os.path.join(args.dest, backup_name)
         workdir = os.path.join(args.dest, args.db_name + '_' + date_str)
         sql_dump = os.path.join(workdir, 'dump.sql')
+        os.mkdir(workdir)
         backup_postgres_db(args.db_host, args.db_name, args.db_port, args.db_user, args.db_password, sql_dump, True)
         filestore_dir = os.path.join('/datadir', 'filestore')
         filestore = os.path.join(filestore_dir, args.db_name)
