@@ -6,12 +6,20 @@ from datetime import datetime
 import requests
 import sys
 import os
+import zipfile
 import json
 from rclone_python import rclone, remote_types
 from rclone_python.hash_types import HashTypes
-from postgres_manager import swap_restore_active
+from postgres_manager import swap_restore_active, backup_postgres_db
 import shutil
 
+def zip_dir(dest,directory,format):
+    zf = zipfile.ZipFile(dest, format)
+    for dirname, subdirs, files in os.walk(directory):
+        zf.write(dirname)
+        for filename in files:
+            zf.write(os.path.join(dirname, filename))
+    zf.close()
 
 def swap_filestore(db_from, db_to):
     print("Swap Filestore")
@@ -38,11 +46,20 @@ def odoo_backup(args):
     try:
         date_str = datetime.now().strftime("%m%d%_Y%H%M%S")
         backup_name = args.db_name + '_' + date_str + '.zip'
-        backup_full_name = args.dest + '/' + backup_name
-        sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
-        backup_file = open(backup_full_name, 'wb')
-        backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
-        backup_file.close()
+        backup_full_name = os.path.join(args.dest, backup_name)
+        workdir = os.path.join(args.dest, args.db_name + '_' + date_str)
+        sql_dump = os.path.join(workdir, 'dump.sql')
+        backup_postgres_db(args.db_host, args.db_name, args.db_port, args.db_user, args.db_password, sql_dump, True)
+        filestore_dir = os.path.join('/datadir', 'filestore')
+        filestore = os.path.join(filestore_dir, args.db_name)
+        if os.path.exists(filestore):
+            shutil.copytree(filestore, os.path.join(workdir, 'filestore'))
+        #sock = XMLServerProxy('http://localhost:8069/xmlrpc/db')
+        zip_dir(backup_full_name,workdir,'w')
+        #backup_file = open(backup_full_name, 'wb')
+        #backup_file.write(base64.b64decode(sock.dump(args.master_password, args.db_name, 'zip')))
+        #backup_file.close()
+        shutil.rmtree(workdir)
         print('Backup file created')
         print('Loading to S3')
         rclone.copy(backup_full_name, args.store_name + ":" + args.bucket_name + "/" + args.subscription)
