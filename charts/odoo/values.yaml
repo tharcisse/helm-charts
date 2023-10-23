@@ -4,6 +4,8 @@ letsencrypted: false
 env: "prod"
 branch: "prod"
 revision: ""
+ressources:
+  enable: false
 postgres:
   password: PG_RANDOM_PASSWORD
   imageversion: postgres:15

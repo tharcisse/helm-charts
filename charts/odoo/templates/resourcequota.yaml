@@ -1,0 +1,12 @@
+{{- if .Values.ressources.enable }}
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: subscription-resources
+spec:
+  hard:
+    requests.cpu: {{.Valuespostgres.cpurequest | quote}}
+    requests.memory: {{.Values.postgres.memoryrequest}}
+    limits.cpu: {{.Values.postgres.cpulimit | quote}}
+    limits.memory: {{.Values.postgres.memorylimit }}
+{{- end}}
