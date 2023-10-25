@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: "filestore-{{.Values.namespace}}"
   capacity:
-    storage: {{.Values.postgres.storage}} # Sets PV Volume
+    storage: {{.Values.filestore.storage}} # Sets PV Volume
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle

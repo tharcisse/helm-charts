@@ -7,6 +7,7 @@ branchenv: "prod"
 revision: ""
 ressources:
   enable: false
+  totalstorage: "10Gi"
 filestore:
   storage: 5Gi
 postgres:

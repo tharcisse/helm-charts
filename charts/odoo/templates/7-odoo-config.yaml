@@ -1,3 +1,4 @@
+{{- if ne .Values.env "base"}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -28,3 +29,4 @@ data:
   DBHOST: "postgres-service.{{.Values.namespace}}.svc"
   DBUSER: odoo
   DBPORT: "5432"
+{{- end}}
