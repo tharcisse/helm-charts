@@ -46,8 +46,10 @@ odoo:
   masterdbpass: ""
   backupcurrentdb: "NO"
   podcode: ""
+  service:
+    port: 8069
   ingress:
-    enabled: false
+    enabled: true
     email: ""
     className: ""
     annotations: {}

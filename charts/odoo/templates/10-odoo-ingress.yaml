@@ -2,6 +2,7 @@
 {{- if .Values.odoo.ingress.enabled -}}
 {{- $fullName := include "odoo.fullname" . -}}
 {{- $svcPort := .Values.odoo.service.port -}}
+{{- $branchenv := .Values.branchenv -}}
 {{- if and .Values.odoo.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.odoo.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.odoo.ingress.annotations "kubernetes.io/ingress.class" .Values.odoo.ingress.className}}
@@ -16,7 +17,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: odoo-ingress-{{.Values.branchenv}}
+  name: odoo-ingress-{{ $branchenv }}
   labels:
     {{- include "odoo.labels" . | nindent 4 }}
   {{- with .Values.odoo.ingress.annotations }}
@@ -53,11 +54,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: odoo-service-{{ .Values.branchenv }}
+                name: odoo-service-{{ $branchenv }}
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: odoo-service{{ .Values.branchenv }}
+              serviceName: odoo-service-{{ $branchenv }}
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
