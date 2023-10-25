@@ -1,4 +1,4 @@
-{{- if eq .Values.env "titi"}}
+{{- if eq .Values.env "base"}}
 {{- if .Values.ressources.enable -}}
 apiVersion: v1
 kind: ResourceQuota
