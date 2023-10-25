@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: odoo-config
+  name: odoo-config-{{.Values.branchenv}}
   namespace: {{.Values.namespace}}
   labels:
     app: odoo

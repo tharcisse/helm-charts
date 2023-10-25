@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: odoo-deployment
+  name: odoo-deployment-{{.Values.branchenv}}
   labels:
     app: odoo
   namespace: {{.Values.namespace}}
@@ -79,7 +79,7 @@ spec:
           name: datadir
         envFrom:
         - configMapRef:
-            name: odoo-config
+            name: odoo-config-{{.Values.branchenv}}
         env:
         - name: BUCKET_NAME
           value: {{.Values.s3object.bucketname | quote }}
@@ -104,7 +104,7 @@ spec:
         command: ["bash", "/mnt/scripts/run.sh"]
         envFrom:
           - configMapRef:
-              name: odoo-config
+              name: odoo-config-{{.Values.branchenv}}
         env:
         - name: HOST
           value: "postgres-service.{{.Values.namespace}}.svc"

@@ -6,6 +6,7 @@ metadata:
 spec:
   hard:
     requests.cpu: {{.Values.postgres.cpurequest | quote}}
+    requests.storage: {{.Values.postgres.storagerequest}}
     requests.memory: {{.Values.postgres.memoryrequest}}
     limits.cpu: {{.Values.postgres.cpulimit | quote}}
     limits.memory: {{.Values.postgres.memorylimit }}

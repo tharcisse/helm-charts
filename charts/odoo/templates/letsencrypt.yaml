@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: odoo-letsencrypt-{{.Values.branch}}-{{.Values.env}}
+  name: odoo-letsencrypt-{{.Values.branchenv}}
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
