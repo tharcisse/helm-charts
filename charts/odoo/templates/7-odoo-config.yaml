@@ -23,7 +23,7 @@ data:
   BACKUP_CURRENT_DB: {{.Values.odoo.backupcurrentdb | quote }}
   MASTERDB_PASSWORD: {{.Values.odoo.masterdbpass | quote }}
   POD_CODE: {{.Values.odoo.podcode | quote }}
-  ODOO_DB: {{.Values.namespace}}
+  ODOO_DB: {{.Values.namespace}}-{{.Values.branchenv}}
   DBPASSWORD: {{.Values.postgres.password}}
   DBHOST: "postgres-service.{{.Values.namespace}}.svc"
   DBUSER: odoo

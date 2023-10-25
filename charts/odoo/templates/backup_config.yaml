@@ -1,4 +1,4 @@
-{{- if or (eq .Values.env "prod") (eq .Values.env "stage")}}
+{{- if eq .Values.env "base"}}
 apiVersion: v1
 kind: ConfigMap
 metadata:

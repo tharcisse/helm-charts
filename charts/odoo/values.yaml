@@ -7,6 +7,8 @@ branchenv: "prod"
 revision: ""
 ressources:
   enable: false
+filestore:
+  storage: 5Gi
 postgres:
   password: PG_RANDOM_PASSWORD
   imageversion: postgres:15

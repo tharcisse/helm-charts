@@ -1,3 +1,4 @@
+{{- if eq .Values.env "base"}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,3 +8,4 @@ metadata:
     app: odoo-backup
 data:
 {{ (.Files.Glob "scripts/pvchecker.sh").AsConfig | indent 2 }}
+{{- end}}

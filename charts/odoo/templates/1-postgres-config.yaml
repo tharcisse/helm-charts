@@ -1,3 +1,4 @@
+{{- if eq .Values.env "base"}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,4 +10,6 @@ data:
   POSTGRES_DB: postgres
   POSTGRES_USER: odoo
   POSTGRES_PASSWORD: {{.Values.postgres.password}}
+
+{{- end}}
   

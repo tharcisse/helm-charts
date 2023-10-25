@@ -52,7 +52,7 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: odoo-service
+                name: odoo-service-{{.Values.branchenv}}
                 port:
                   number: {{ $svcPort }}
               {{- else }}

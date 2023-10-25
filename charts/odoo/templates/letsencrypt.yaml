@@ -1,16 +1,18 @@
+{{- if eq .Values.env "base"}}
 {{- if .Values.letsencrypted -}}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: odoo-letsencrypt-{{.Values.branchenv}}
+  name: odoo-letsencrypt
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: {{.Values.odoo.ingress.email}}
     privateKeySecretRef:
-      name: odoo-letsencrypt-{{.Values.branch}}-{{.Values.env}}
+      name: odoo-letsencrypt
     solvers:
       - http01:
           ingress:
             class: public
+{{- end}}
 {{- end}}

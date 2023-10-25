@@ -1,3 +1,4 @@
+{{- if eq .Values.env "base"}}
 apiVersion: v1
 kind: PersistentVolumeClaim # Create PVC
 metadata:
@@ -9,4 +10,6 @@ spec:
     - ReadWriteMany # Sets read and write access
   resources:
     requests:
-      storage: {{.Values.postgres.storage}} # Sets volume size
+      storage: {{.Values.filestore.storage}} # Sets volume size
+
+{{- end}}

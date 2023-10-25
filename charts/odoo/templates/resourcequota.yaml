@@ -1,3 +1,4 @@
+{{- if eq .Values.env "base"}}
 {{- if .Values.ressources.enable -}}
 apiVersion: v1
 kind: ResourceQuota
@@ -10,4 +11,5 @@ spec:
     requests.memory: {{.Values.postgres.memoryrequest}}
     limits.cpu: {{.Values.postgres.cpulimit | quote}}
     limits.memory: {{.Values.postgres.memorylimit }}
+{{- end}}
 {{- end}}

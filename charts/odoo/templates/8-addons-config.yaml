@@ -1,3 +1,4 @@
+{{- if eq .Values.env "base"}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -15,4 +16,4 @@ data:
 {{ (.Files.Glob "scripts/wait-for-psql.py").AsConfig | indent 2 }}
 {{ (.Files.Glob "scripts/unzip.py").AsConfig | indent 2 }}
 
-
+{{- end}}
