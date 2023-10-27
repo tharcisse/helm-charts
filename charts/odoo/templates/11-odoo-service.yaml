@@ -7,7 +7,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: odoo
+    app: odoo-{{.Values.branchenv}}
   ports:
     - protocol: TCP
       name: odoo

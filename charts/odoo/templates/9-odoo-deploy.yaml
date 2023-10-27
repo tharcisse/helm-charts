@@ -4,17 +4,17 @@ kind: Deployment
 metadata:
   name: odoo-deployment-{{.Values.branchenv}}
   labels:
-    app: odoo
+    app: odoo-{{.Values.branchenv}}
   namespace: {{.Values.namespace}}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: odoo
+      app: odoo-{{.Values.branchenv}}
   template:
     metadata:
       labels:
-        app: odoo
+        app: odoo-{{.Values.branchenv}}
         hash: {{.Values.odoo.deploymenthash}}
         revision: {{.Values.revision}}
     spec:
