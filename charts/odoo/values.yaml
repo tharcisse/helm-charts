@@ -50,6 +50,7 @@ odoo:
     port: 8069
   ingress:
     enabled: true
+    cloudflaretoken: ""
     email: ""
     className: ""
     annotations: {}
