@@ -5,14 +5,14 @@ metadata:
   name: cloudflare-issue
 spec:
   acme:
-    email: {{.Values.odoo.ingress.email}}
+    email: {{.Values.odoo.ingress.cloudflareemail}}
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cluster-issuer-account-key
     solvers:
     - dns01:
         cloudflare:
-          email: {{.Values.odoo.ingress.email}}
+          email: {{.Values.odoo.ingress.cloudflareemail}}
           apiTokenSecretRef:
             name: cloudflare-api-token
             key: api-token

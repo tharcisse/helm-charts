@@ -51,6 +51,7 @@ odoo:
   ingress:
     enabled: true
     cloudflaretoken: ""
+    cloudflareemail: ""
     email: ""
     className: ""
     annotations: {}
