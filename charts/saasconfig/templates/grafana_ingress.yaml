@@ -26,7 +26,5 @@ spec:
   tls:
     - hosts:
       - {{.Values.grafana.host}}
-      {{- if .Values.ingress.secretNameEnabled -}}
       secretName: {{ .secretName }}
-      {{- end }}
 {{- end}}
