@@ -26,5 +26,7 @@ spec:
   tls:
     - hosts:
       - {{.Values.prometheus.host}}
-      secretName: prometheus.tls
+      {{- if .Values.ingress.secretNameEnabled -}}
+      secretName: {{ .secretName }}
+      {{- end }}
 {{- end}}

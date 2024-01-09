@@ -22,7 +22,9 @@ spec:
       {{- range .hosts }}
         - {{ . | quote }}
       {{- end }}
+      {{- if .Values.ingress.secretNameEnabled -}}
       secretName: {{ .secretName }}
+      {{- end }}
   {{- end }}
 {{- end }}
   rules:
