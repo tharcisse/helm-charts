@@ -16,7 +16,7 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-secretNameEnabled: true
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -51,6 +51,7 @@ service:
 
 ingress:
   enabled: false
+  secretNameEnabled: true
   email: ""
   className: ""
   annotations: 
