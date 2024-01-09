@@ -6,6 +6,7 @@ metadata:
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
   {{- end }}
 spec:
   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
@@ -22,7 +23,7 @@ spec:
             service:
               name: argocd-server
               port:
-                name: http
+                name: https
     {{- end }}
   tls:
     {{- range .Values.ingress.tls }}
