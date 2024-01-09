@@ -15,7 +15,7 @@ image:
 
 nameOverride: ""
 fullnameOverride: ""
-secretNameEnabled: false
+secretNameEnabled: true
 service:
   type: ClusterIP
   port: 8080
