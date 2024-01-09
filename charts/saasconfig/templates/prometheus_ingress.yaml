@@ -25,6 +25,6 @@ spec:
                 name: web
   tls:
     - hosts:
-      - {{.Values.prometheus.host}}
+      - {{ .Values.prometheus.host}}
       secretName: {{ .Values.certificate }}
 {{- end}}

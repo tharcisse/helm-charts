@@ -26,5 +26,5 @@ spec:
   tls:
     - hosts:
       - {{.Values.grafana.host}}
-      secretName: {{ Values.certificate }}
+      secretName: {{ .Values.certificate }}
 {{- end}}
