@@ -6,7 +6,8 @@
 source_url: "https://github.com/lf1029698952/kube-webshell"
 
 replicaCount: 1
-
+cloudflaretoken: ""
+cloudflareemail: ""
 image:
   repository: tarcisse/kube-webshell
   tag: latest
